@@ -213,7 +213,6 @@
       border-bottom: 1px solid #ccc;
       padding: 12px 14px;
       margin-bottom: 14px;
-      font-style: normal;
     }
 
     .quote-author {
@@ -266,6 +265,41 @@
       text-align: center;
       margin-top: 24px;
       padding: 10px 0;
+    }
+
+    /* Şifreli Editör Paneli */
+    .admin-form label {
+      display: block;
+      font-weight: bold;
+      margin: 8px 0 3px 0;
+      font-size: 12px;
+    }
+
+    .admin-form input[type="text"],
+    .admin-form input[type="password"],
+    .admin-form select,
+    .admin-form textarea {
+      width: 100%;
+      border: 1px solid #666;
+      background: #ffffff;
+      padding: 6px;
+      font-family: "Courier New", monospace;
+      font-size: 12px;
+    }
+
+    .admin-btn {
+      background: #24413e;
+      color: #ffffff;
+      border: 1px solid #000;
+      padding: 6px 14px;
+      cursor: pointer;
+      font-family: monospace;
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
+    .admin-btn:hover {
+      background: #1b312e;
     }
 
     .page-section {
@@ -340,7 +374,7 @@
           <li><a onclick="navigateTo('fihrist')">Fihrist</a></li>
           <li><a onclick="navigateTo('hakkimda')">Hakkımda</a></li>
           <li><a onclick="navigateTo('irtibat')">İrtibat</a></li>
-          <li><a href="https://instagram.com/kullaniciadin" target="_blank">Instagram</a></li>
+          <li><a href="https://instagram.com/krmisn" target="_blank">Instagram</a></li>
         </ul>
 
         <hr style="border: 0; border-top: 1px solid #999; margin: 15px 0;">
@@ -348,7 +382,9 @@
         <div style="font-size: 11px; color: #444;">
           ZİYARETÇİ:<br>
           <span class="counter-box">001048</span><br><br>
-          <span>[calik.in]<br>Sıfır izleyici.<br>Sıfır reklam.</span>
+          <span>[calik.in]<br>Bağımsız metin kaydı.<br>Ankara.</span>
+          <br><br>
+          <a onclick="openAdminGate()" style="color: #888; font-size: 10px; text-decoration: none;">[YÖNETİM]</a>
         </div>
       </div>
 
@@ -366,33 +402,14 @@
           <hr class="bevel">
           <span class="section-badge">SON KAYITLAR</span>
 
-          <ul class="article-list">
-            <li>
-              <a class="article-link" onclick="openPost('kaya-ve-nehir')">Kaya ve Nehir: Sertliğin Kırılganlığı, Suyun İradesi</a>
-              <span class="article-desc">Nehrin yatağındaki dev bir kayayı aşındıran şey anlık bir darbe değildir; köşelere takılmadan akabilme iradesidir.</span>
-            </li>
-            <li>
-              <a class="article-link" onclick="openPost('bataklik-ve-lotus')">Bataklık ve Lotus: Çamurun Ortasında Özü Korumak</a>
-              <span class="article-desc">Dünyadan kaçarak değil; kirlenmenin ortasında durup onun zehrini kendi içine almayı reddederek var olmak.</span>
-            </li>
-            <li>
-              <a class="article-link" onclick="openPost('kibir-motoru')">Kibir Motoru ve Kitlelerin Merhametsizleşmesi</a>
-              <span class="article-desc">Kitleleri güden kurumsal ve ideolojik yapılar, neden her şeyden önce bireysel merhameti ve vicdanı tasfiye eder?</span>
-            </li>
-            <li>
-              <a class="article-link" onclick="openPost('dunyanin-sefasi')">Dünyanın Cefası ve Kaçış Yanılgısı</a>
-              <span class="article-desc">Kurtuluşu steril köşelerde veya soyut felsefelerde aramak yerine hayatın çıplak ve sert gerçekliğiyle yüzleşmek.</span>
-            </li>
-            <li>
-              <a class="article-link" onclick="openPost('tarihsel-zafiyet')">Tarihsel Zafiyet: Kast, Tahakküm ve İnsanın Sınırları</a>
-              <span class="article-desc">İnsanın kendisini evrenin mutlak efendisi sanması ile kurduğu hiyerarşik sömürü mekanizmaları arasındaki yapısal bağ.</span>
-            </li>
+          <ul class="article-list" id="home-post-list">
+            <!-- Otomatik dinamik liste -->
           </ul>
 
           <hr class="bevel">
-          <span class="section-badge">ARŞİV HAKKINDA</span>
+          <span class="section-badge">METİN DİSİPLİNİ</span>
           <p style="font-size: 12.5px; color: #333; line-height: 1.5;">
-            Bu sayfa sosyal medya algoritmalarından uzak, 2000'lerin başındaki bağımsız web mantığıyla tutulan şahsi bir not defteridir. İlgili başlıklara sol menüden ulaşabilirsiniz.
+            Bu arşiv; düşüncelerin, nesnelerin ve toplumsal süreçlerin nedensellik bağlamında incelendiği şahsi bir kayıt defteridir. İçerikler, dışsal gürültülerden ve yapay süslemelerden bağımsız olarak doğrudan meselenin özüne odaklanma prensibiyle derlenmektedir.
           </p>
         </div>
 
@@ -402,11 +419,8 @@
           <span class="section-badge">GÖZLEMLER</span>
           <p>Maddenin fiziksel halleri, mekanik, çevre ve gündelik saha kayıtları.</p>
 
-          <ul class="article-list">
-            <li>
-              <a class="article-link" onclick="openPost('kaya-ve-nehir')">Kaya ve Nehir: Sertliğin Kırılganlığı, Suyun İradesi</a>
-              <span class="article-desc">Nehrin önüne düşen engeller, suyun aşındırma dengesi ve ısıl işlem görmüş katı maddelerin buhara dönüşümü.</span>
-            </li>
+          <ul class="article-list" id="list-gozlemler">
+            <!-- Otomatik doldurulur -->
           </ul>
         </div>
 
@@ -416,15 +430,8 @@
           <span class="section-badge">VARLIK & NEDEN</span>
           <p>Sebep-sonuç ilişkileri, formun geçiciliği, zihin ve asgari yaşam üzerine notlar.</p>
 
-          <ul class="article-list">
-            <li>
-              <a class="article-link" onclick="openPost('bataklik-ve-lotus')">Bataklık ve Lotus: Çamurun Ortasında Özü Korumak</a>
-              <span class="article-desc">Öz-disiplin, lotus yaprağının mikroskobik dokusu ve dışarıdan gelen kirlenmeye karşı iç koruma mekaniği.</span>
-            </li>
-            <li>
-              <a class="article-link" onclick="openPost('dunyanin-sefasi')">Dünyanın Cefası ve Kaçış Yanılgısı</a>
-              <span class="article-desc">Acıyı soyut bir metafiziğe indirgemeden, gündelik hayatın içinde kalarak kavrama disiplini.</span>
-            </li>
+          <ul class="article-list" id="list-varlik-neden">
+            <!-- Otomatik doldurulur -->
           </ul>
         </div>
 
@@ -434,15 +441,8 @@
           <span class="section-badge">KAMUSAL MESELELER</span>
           <p>Toplumsal düzen, planlama, üretim, üçüncü dünya ve güncel meseleler.</p>
 
-          <ul class="article-list">
-            <li>
-              <a class="article-link" onclick="openPost('kibir-motoru')">Kibir Motoru ve Kitlelerin Merhametsizleşmesi</a>
-              <span class="article-desc">Kitle psikolojisi, ideolojik yapıların bireysel vicdanı yok etme süreci ve güç aygıtlarının işleyişi.</span>
-            </li>
-            <li>
-              <a class="article-link" onclick="openPost('tarihsel-zafiyet')">Tarihsel Zafiyet: Kast, Tahakküm ve İnsanın Sınırları</a>
-              <span class="article-desc">İnsanı terbiye edilmesi gereken bir makineye indirgeyen hiyerarşik sistemlerin ve mülkiyet kibrinin kökleri.</span>
-            </li>
+          <ul class="article-list" id="list-kamusal-meseleler">
+            <!-- Otomatik doldurulur -->
           </ul>
         </div>
 
@@ -452,7 +452,6 @@
           <span class="section-badge">ŞİİRLER & ALINTILAR</span>
           <p>Toprak, emek, sükûnet ve direniş damarından başucu mısraları:</p>
 
-          <!-- 1. Nâzım Hikmet -->
           <div class="quote-box">
             Demir, kömür ve şeker<br>
             ve kırmızı bakır<br>
@@ -465,7 +464,6 @@
             <div class="quote-author">— Nâzım Hikmet</div>
           </div>
 
-          <!-- 2. Matsuo Bashō -->
           <div class="quote-box">
             Eski sessiz gölet,<br>
             Bir kurbağa sıçrar içine,<br>
@@ -475,7 +473,6 @@
             <div class="quote-author">— Matsuo Bashō</div>
           </div>
 
-          <!-- 3. Du Fu -->
           <div class="quote-box">
             Devlet yıkılır, dağlar ve nehirler kalır yerinde;<br>
             Bahar gelir şehre, otlar ve ağaçlar yeşerir yine.<br>
@@ -486,7 +483,6 @@
             <div class="quote-author">— Du Fu (Tang Hanedanı)</div>
           </div>
 
-          <!-- 4. İsmet Özel -->
           <div class="quote-box">
             Ben bir şairim ve bilirim ki taşlar<br>
             ancak sert oldukları kadar ufalanırlar.<br>
@@ -504,7 +500,6 @@
           <span class="section-badge">FİHRİST & İNCELEMELER</span>
           <p>Okuma kayıtları, tarihsel çözümlemeler ve başucu kaynakları (6 Eser):</p>
 
-          <!-- 1. Tao Te Ching -->
           <div class="book-card">
             <div class="book-cover-frame">
               <img src="https://covers.openlibrary.org/b/isbn/9780140441314-M.jpg" class="book-cover-img" alt="Tao Te Ching">
@@ -512,12 +507,11 @@
             <div style="font-size: 11px; color: #666;">FHR-01 &bull; DOĞU DÜŞÜNCESİ & AKIŞ</div>
             <h3 style="margin: 3px 0 6px 0; color: #8b1e1e;">Tao Te Ching — Laozi</h3>
             <div style="font-size: 12.5px; line-height: 1.55; color: #222;">
-              Suyun hiçbir şeye meydan okumadan her şeyin biçimini alması bir teslimiyet değil, doğadaki kuvvetler dengesini doğru okuma sanatıdır. Nehrin yatağındaki dev bir kayayı yerinden söken şey sertliği değil, suyun köşelere takılmadan akabilme iradesidir. Sert olan kırılgandır; gerilimi içinde biriktirir ve ansızın çatlar. <em>Tao Te Ching</em>, eylemsizliği (wu wei) bir tembellik olarak değil; lüzumsuz sürtünmeden kaçınmak, doğanın sebep-sonuç döngüsüne müdahale etmeden onunla birlikte devinmek olarak açıklar.
+              Suyun hiçbir şeye meydan okumadan her şeyin biçimini alması bir teslimiyet değil, doğadaki kuvvetler dengesini doğru okuma sanatıdır. Nehrin yatağındaki dev bir kayayı yerinden söken şey sertliği değil, suyun köşelere takılmadan akabilme iradesidir. Sert olan kırılgandır; gerilimi içinde biriktirir ve ansızın çatlar. Tao Te Ching, eylemsizliği (wu wei) bir tembellik olarak değil; lüzumsuz sürtünmeden kaçınmak, doğanın sebep-sonuç döngüsüne müdahale etmeden onunla birlikte devinmek olarak açıklar.
             </div>
             <div style="clear: both;"></div>
           </div>
 
-          <!-- 2. Mūlamadhyamakakārikā -->
           <div class="book-card">
             <div class="book-cover-frame">
               <img src="https://covers.openlibrary.org/b/isbn/9780195093360-M.jpg" class="book-cover-img" alt="Mūlamadhyamakakārikā">
@@ -525,12 +519,11 @@
             <div style="font-size: 11px; color: #666;">FHR-02 &bull; NEDENSELLİK & MANTIK</div>
             <h3 style="margin: 3px 0 6px 0; color: #8b1e1e;">Mūlamadhyamakakārikā — Nāgārjuna</h3>
             <div style="font-size: 12.5px; line-height: 1.55; color: #222;">
-              Nāgārjuna mistik süsleri ve soyut dogmaları bir kenara bırakarak doğrudan dilin ve mantığın sınırlarını zorlar. Temel tez son derece nettir: Hiçbir nesnenin, hiçbir olgunun kendi başına bağımsız bir tözü (özü) yoktur; her şey karşılıklı bir neden-sonuç zinciri (pratītyasamutpāda) içinde varlık kazanır. Bir malzemenin sertliği bile ancak ona uygulanan kuvvet karşısında anlam bulur. Bağımsız bir "ben" vehmini yıkan, varoluşu mutlak bir ilişki ağı olarak ortaya koyan en sarsılmaz felsefi çözümlemedir.
+              Nāgārjuna mistik süsleri ve soyut dogmaları bir kenara bırakarak doğrudan dilin ve mantığın sınırlarını zorlar. Temel tez son derece nettir: Hiçbir nesnenin, hiçbir olgunun kendi başına bağımsız bir tözü yoktur; her şey karşılıklı bir neden-sonuç zinciri içinde varlık kazanır. Bir malzemenin sertliği bile ancak ona uygulanan kuvvet karşısında anlam bulur. Bağımsız bir ben vehmini yıkan en sarsılmaz felsefi çözümlemedir.
             </div>
             <div style="clear: both;"></div>
           </div>
 
-          <!-- 3. The Darker Nations -->
           <div class="book-card">
             <div class="book-cover-frame">
               <img src="https://covers.openlibrary.org/b/isbn/9781595583420-M.jpg" class="book-cover-img" alt="The Darker Nations">
@@ -538,12 +531,11 @@
             <div style="font-size: 11px; color: #666;">FHR-03 &bull; ÜÇÜNCÜ DÜNYA & TARİH</div>
             <h3 style="margin: 3px 0 6px 0; color: #8b1e1e;">The Darker Nations — Vijay Prashad</h3>
             <div style="font-size: 12.5px; line-height: 1.55; color: #222;">
-              "Üçüncü Dünya" bugün zihinlerde yoksulluğun coğrafi adı gibi kodlanıyor; oysa Prashad bunun bir yer değil, tarihsel bir irade olduğunu hatırlatır. 1955 Bandung Konferansı’nda Nehru, Sukarno, Çu En-lay ve Nasır’ın temsil ettiği şey; dünyanın iki kutuplu nükleer tahakküme teslim olmasına karşı bağımsız bir kalkınma hattı kurma kararlılığıydı. Kendi kaynaklarına güvenen bir ağır sanayi, kamucu bir planlama ve emperyal sömürüye karşı ortak bir cephe... Kitap, bu iradenin hangi borç tuzaklarıyla ve darbelerle tasfiye edildiğini soğukkanlılıkla belgeler.
+              Üçüncü Dünya bugün zihinlerde yoksulluğun coğrafi adı gibi kodlanıyor; oysa Prashad bunun bir yer değil, tarihsel bir irade olduğunu hatırlatır. 1955 Bandung Konferansı’nda temsil edilen şey; dünyanın iki kutuplu nükleer tahakküme teslim olmasına karşı bağımsız bir hat kurma kararlılığıydı. Kendi kaynaklarına güvenen bir ağır sanayi, kamucu bir planlama ve emperyal sömürüye karşı ortak bir cephe arayışının belgesidir.
             </div>
             <div style="clear: both;"></div>
           </div>
 
-          <!-- 4. İnsanlığın Bu Dünyası -->
           <div class="book-card">
             <div class="book-cover-frame">
               <img src="https://covers.openlibrary.org/b/isbn/9780140256352-M.jpg" class="book-cover-img" alt="This Earth of Mankind">
@@ -551,25 +543,23 @@
             <div style="font-size: 11px; color: #666;">FHR-04 &bull; ASYA EDEBİYATI & DİRENİŞ</div>
             <h3 style="margin: 3px 0 6px 0; color: #8b1e1e;">İnsanlığın Bu Dünyası — Pramoedya Ananta Toer</h3>
             <div style="font-size: 12.5px; line-height: 1.55; color: #222;">
-              Pramoedya bu başyapıtı Suharto rejiminin Buru Adası tecrit kampında, kağıt ve kalemin yasak olduğu koşullarda koğuş arkadaşlarına gece fısıldayarak ezberletti. 19. yüzyıl sonu Cava’sında Hollanda sömürge hukuku ile yerli feodalizmin kurduğu çifte mengeneyi anlatır. Başkarakter Minke Batı’nın "hukuk ve medeniyet" masallarına inanmış bir soyludur; ta ki sömürge mahkemesinin yerliyi insan bile saymayan çarkıyla ezilene kadar. Asya halklarının uyanışını ve insanın onurunu ancak kendi toprağıyla savunabileceğini gösteren sarsıcı bir direniş belgesidir.
+              Pramoedya bu başyapıtı Buru Adası tecrit kampında, koğuş arkadaşlarına gece fısıldayarak ezberletti. 19. yüzyıl sonu Cava’sında sömürge hukuku ile yerli feodalizmin kurduğu çifte mengeneyi anlatır. Minke Batı’nın hukuk masallarına inanmış bir soyludur; ta ki sömürge mahkemesinin yerliyi insan bile saymayan çarkıyla ezilene kadar. Asya halklarının uyanışını haykıran kurucu bir belgedir.
             </div>
             <div style="clear: both;"></div>
           </div>
 
-          <!-- 5. Büyük Dönüşüm -->
           <div class="book-card">
             <div class="book-cover-frame">
               <img src="https://covers.openlibrary.org/b/isbn/9780807056431-M.jpg" class="book-cover-img" alt="The Great Transformation">
             </div>
             <div style="font-size: 11px; color: #666;">FHR-05 &bull; İKTİSAT & KAMU DÜZENİ</div>
-            <h3 style="margin: 3px 0 6px 0; color: #8b1e1e;">Büyük Dönüşüm (The Great Transformation) — Karl Polanyi</h3>
+            <h3 style="margin: 3px 0 6px 0; color: #8b1e1e;">Büyük Dönüşüm — Karl Polanyi</h3>
             <div style="font-size: 12.5px; line-height: 1.55; color: #222;">
-              Kendi kendini düzenleyen piyasa fikri bir doğa kanunu değil, toplumu parçalayan ütopik ve yıkıcı bir kurgudur. Polanyi; emeğin, toprağın ve paranın metalaştırılmasının insan tabiatına aykırı olduğunu tarihsel delillerle gösterir. Piyasayı dizginsiz bıraktığınızda toplum kendini korumak için kaçınılmaz refleksler üretir. İktisadın toplumun ve kamunun denetiminde olması gerektiğini, aksi halde üretim ilişkilerinin barbarlığa dönüşeceğini anlatan en temel kamucu analizdir.
+              Kendi kendini düzenleyen piyasa fikri bir doğa kanunu değil, toplumu parçalayan ütopik ve yıkıcı bir kurgudur. Polanyi; emeğin, toprağın ve paranın metalaştırılmasının insan tabiatına aykırı olduğunu gösterir. İktisadın toplumun ve kamunun denetiminde olması gerektiğini, aksi halde üretim ilişkilerinin barbarlığa dönüşeceğini anlatan temel kamucu analizdir.
             </div>
             <div style="clear: both;"></div>
           </div>
 
-          <!-- 6. İnce Memed -->
           <div class="book-card">
             <div class="book-cover-frame">
               <img src="https://covers.openlibrary.org/b/isbn/9789750807145-M.jpg" class="book-cover-img" alt="İnce Memed">
@@ -577,7 +567,7 @@
             <div style="font-size: 11px; color: #666;">FHR-06 &bull; TOPRAK, MÜLKİYET & ANADOLU</div>
             <h3 style="margin: 3px 0 6px 0; color: #8b1e1e;">İnce Memed — Yaşar Kemal</h3>
             <div style="font-size: 12.5px; line-height: 1.55; color: #222;">
-              Çukurova’nın sıcağı, pamuk tarlaları ve Toroslar’ın sarp kayalıkları sadece bir arka plan değil; doğrudan karakterlerin öfkesini ve kemik yapısını belirleyen fiziki unsurlardır. İnce Memed bireysel bir intikam hikayesi değildir; topraksız bırakılan, hasadına el konan köylünün adaletsiz mülkiyet düzenine karşı geliştirdiği biyolojik bir reflekstir. Bir ağa gider yerine başkası gelir; çünkü asıl mesele şahıslar değil, toprağın üstündeki zulüm mekanizmasıdır. Dili Toros kayaları kadar sert ve topraktan beslenen bir halk destanıdır.
+              Çukurova’nın sıcağı ve Toroslar’ın sarp kayalıkları Yaşar Kemal’in anlatımında doğrudan karakterlerin öfkesini belirleyen fiziki unsurlardır. İnce Memed bireysel bir intikam hikayesi değildir; topraksız bırakılan, hasadına el konan köylünün adaletsiz mülkiyet düzenine karşı geliştirdiği biyolojik bir reflekstir. Dili Toros kayaları kadar sert ve topraktan beslenen bir halk destanıdır.
             </div>
             <div style="clear: both;"></div>
           </div>
@@ -611,7 +601,7 @@
             <p>Doğrudan iletişim ve yazışmalar için:</p>
             <p>
               &bull; <strong>E-Posta:</strong> <a href="mailto:kerem@calik.in">kerem@calik.in</a><br>
-              &bull; <strong>Instagram:</strong> <a href="https://instagram.com/kullaniciadin" target="_blank">@kullaniciadin</a>
+              &bull; <strong>Instagram:</strong> <a href="https://instagram.com/krmisn" target="_blank">@krmisn</a>
             </p>
           </div>
         </div>
@@ -634,6 +624,81 @@
           </div>
         </div>
 
+        <!-- ================= 9. ŞİFRELİ YÖNETİM & OTOMATİK EDİTÖR ================= -->
+        <div id="page-admin" class="page-section">
+          <div class="breadcrumb">Gezinti: <a onclick="navigateTo('home')">Ana Sayfa</a> &gt; Güvenli Editör</div>
+          <span class="section-badge">METİN YÖNETİMİ & OTOMATİK YAYIN</span>
+
+          <!-- Şifre Giriş Formu -->
+          <div id="admin-auth-box" class="paper-box">
+            <p style="font-size: 12px; margin-top: 0;">Bu alana erişim için şifre gereklidir.</p>
+            <label style="font-weight: bold; font-size: 11px;">ŞİFRE:</label><br>
+            <input type="password" id="adminPasswordInput" style="border: 1px solid #333; padding: 4px 8px; font-family: monospace; font-size: 13px;">
+            <button onclick="verifyAdminPassword()" class="admin-btn" style="margin-top: 6px;">Giriş Yap</button>
+            <div id="authErrorMsg" style="color: #990000; font-size: 11px; margin-top: 6px; display: none;">Hatalı şifre.</div>
+          </div>
+
+          <!-- Editör Formu -->
+          <div id="admin-editor-box" class="paper-box admin-form" style="display: none;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+              <strong style="color: #24413e;">YENİ METİN KAYDI & OTOMATİK COMMIT</strong>
+              <button onclick="logoutAdmin()" style="font-size: 10px; cursor: pointer;">Çıkış</button>
+            </div>
+
+            <!-- GitHub API Entegrasyon Ayarları (Tek Seferlik Kaydedilir) -->
+            <details style="margin-bottom: 12px; background: #eae6dd; padding: 8px; border: 1px solid #bbb;">
+              <summary style="font-size: 11.5px; font-weight: bold; cursor: pointer;">[+] GitHub Otomatik Yayınlama Ayarları (Tıkla)</summary>
+              <div style="margin-top: 8px; font-size: 11.5px;">
+                <label>GitHub Kullanıcı Adın:</label>
+                <input type="text" id="ghUser" placeholder="github-kullanici-adin">
+                <label>GitHub Depo Adın (Repository):</label>
+                <input type="text" id="ghRepo" placeholder="calik-in">
+                <label>GitHub Personal Access Token (Fine-grained veya Classic - Repo izni):</label>
+                <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxx">
+                <button onclick="saveGhSettings()" class="admin-btn" style="background: #444; margin-top: 6px;">Ayarları Tarayıcıya Kaydet</button>
+                <span id="ghSaveStatus" style="color: green; margin-left: 6px; display: none;">Kaydedildi!</span>
+              </div>
+            </details>
+
+            <label>YAZI KİMLİĞİ (ID - Türkçe karaktersiz, örn: celik-ve-tavlama):</label>
+            <input type="text" id="newPostId" placeholder="ornek-yazi-id">
+
+            <label>BAŞLIK:</label>
+            <input type="text" id="newPostTitle" placeholder="Yazının Tam Başlığı">
+
+            <label>KATEGORİ:</label>
+            <select id="newPostCat">
+              <option value="gozlemler">Gözlemler</option>
+              <option value="varlik-neden">Varlık & Neden</option>
+              <option value="kamusal-meseleler">Kamusal Meseleler</option>
+            </select>
+
+            <label>KAYIT KODU & TARİH (Örn: Kayıt: GZL-02 • Ankara):</label>
+            <input type="text" id="newPostDate" value="Kayıt: GZL-02 • Ankara">
+
+            <label>KISA ÖZET (Liste görünümünde çıkacak açıklama):</label>
+            <input type="text" id="newPostDesc" placeholder="1-2 cümlelik net özet.">
+
+            <label>METİN İÇERİĞİ (Her paragraf arasına boşluk bırakın):</label>
+            <textarea id="newPostContent" rows="12" placeholder="Yazınızı buraya doğrudan yapıştırın..."></textarea>
+
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <button onclick="publishDirectlyToGitHub()" class="admin-btn" style="background: #000080; font-weight: bold;">⚡ Otomatik GitHub'a Gönder (Kopyalamasız)</button>
+              <button onclick="generatePostCode()" class="admin-btn" style="background: #666;">Yedek: Kod Olarak Gör</button>
+            </div>
+
+            <div id="publishStatusMsg" style="margin-top: 10px; font-weight: bold; font-size: 12px;"></div>
+
+            <!-- Yedek Üretilen Çıktı -->
+            <div id="generatedOutputWrap" style="margin-top: 15px; display: none;">
+              <hr style="border: 0; border-top: 1px dotted #888; margin: 12px 0;">
+              <label>YEDEK KOD ÇIKTISI:</label>
+              <textarea id="generatedOutputCode" rows="6" readonly style="background: #eef;"></textarea>
+              <button onclick="copyGeneratedCode()" class="admin-btn" style="background: #24413e;">Panoya Kopyala</button>
+            </div>
+          </div>
+        </div>
+
         <hr class="bevel">
         <div class="footer">
           © 2026 Kerem Çalık &bull; calik.in &bull; Bağımsız metin arşivi.
@@ -646,70 +711,105 @@
   </div>
 
   <script>
-    // Defterdeki el yazısı notlarından süzülen 5 kapsamlı makale (400-500 kelime)
+    // ================= YAZI HAVUZU (TÜM MAKALELER) =================
+    /*POSTS_DATA_START*/
     const posts = {
       'kaya-ve-nehir': {
         category: 'Gözlemler',
         catKey: 'gozlemler',
         title: 'Kaya ve Nehir: Sertliğin Kırılganlığı, Suyun İradesi',
-        date: 'Kayıt: GZL-01 &bull; Ankara',
+        date: 'Kayıt: GZL-01 • Ankara',
+        desc: 'Nehrin yatağındaki dev bir kayayı aşındıran şey anlık bir öfke değildir; suyun köşelere takılmadan akabilme iradesidir.',
         content: `
-          <p>Hayatın içinde akış mı hakikattir, yoksa akışın içindeki hayat mı? İnsan hayatında gördüğümüz o "oluş", bir girdaptan ya da teslimiyetten ziyade bir nehrin akışına benzer[cite: 10]. Su akmaktadır ama önüne bir engel çıkıp çıkmayacağı belirsizdir[cite: 10]. Gün gelir önüne devasa bir kaya çıkar; nehrin yatağını zorlar, akışı kesmeye çalışır[cite: 10]. Bu noktada bizim hayatımızda olan oluş farklı mıdır? Karşımıza çıkan engelleri değiştirememize rağmen ona bakışımızı, o engelle olan temasımızı nasıl kuruyoruz?[cite: 10]</p>
-          <p>Bir nehrin önüne dev bir kaya düştüğünde, su o kayaya öfkeyle çarpıp kendisini yok etmez[cite: 10, 11]. Nehir onu aşındırıp geçebilir; ama kaya devasa bir setse su geri çekilip birikmez, köşelerinden sızar, etrafından dolanır ve yoluna devam eder[cite: 10, 11]. Nehir kayaya fevri davranmaz[cite: 11]. Kayanın kibri, sertliğinde ve kütlesindedir[cite: 11]. Ancak uzun süre suyun akışına maruz kalan o sert kaya, eninde sonunda unufak olur[cite: 11]. Çünkü sertlik dayanıksızdır; esneklik ve yumuşaklık ise kalıcıdır[cite: 11]. İki tarafın mücadelesi gibi görünen bu durum aslında iki zıtlıktan ziyade akışın hizmetinde olan iki haldir[cite: 13].</p>
-          <p>Malzeme dünyasında da böyledir: Tav çubukları katı ve serttir[cite: 13]. Onu sert ateşle karşılaştırırsınız, akkor hale gelir; ama nihayetinde yumuşar, buhar olur veya suyla karşılaştığında iç gerilimini bırakır[cite: 13]. İnsanın önündeki en büyük engel de dışarıdaki nesneler değil, kendi kibir motorudur[cite: 11]. Engeli bir düşman gibi görüp ona toslamak yerine; su gibi yumuşak, sabırlı ve akışkan kalabilmek insanın en büyük mukavemetidir[cite: 11]. İnsan ve canlıların çıkmazı da burada başlar: Hem materyal olan dünyada hem de kozmolojik bir hakikat olan dünyada sürekli akışın yönünü değiştirmeye çalışırız[cite: 13]. Oysa engelleri düşman olarak görmektense onun mahiyetini gözlemlemek, bu dünyanın kibrinden ve yorgunluğundan arınmanın tek yoludur[cite: 13].</p>
+          <p>Hayatın içinde akış mı hakikattir, yoksa akışın içindeki hayat mı? İnsan ömründe karşılaştığımız ve adına tecrübe dediğimiz şey, tekdüze bir sürüklenişten ziyade dağlardan vadilere doğru yol arayan bir nehrin hareketine benzer. Su akmaktadır; ancak bu akış hiçbir zaman pürüzsüz bir yatakta ilerlemez. Gün gelir, suyun tam önüne devasa bir kaya kütlesi düşer. Kaya serttir, monolitiktir ve bütün ağırlığıyla suyun önünü kesip yatağı boğmaya niyetlidir. Bu noktada bizim gündelik hayatımızda karşımıza çıkan engeller farklı mıdır? Önümüze dikilen duvarları değiştiremediğimiz gerçeğiyle yüzleştiğimizde, o engelle nasıl bir ilişki kuruyoruz?</p>
+          <p>Bir nehrin önüne dev bir kaya düştüğünde, şuursuz bir öfkeyle kayaya çarpıp kendini tüketmez. Nehir bilir ki o kayayı ilk temas anında parçalamak imkânsızdır. Su, kayaya kafa tutarak onu yerinden oynatmaya çalışmak yerine onun etrafından dolanır; çatlaklarına sızar, altını oyar ve sabırla akışına devam eder. Kayanın kibri, sahip olduğu kütlesinde, katı sınırlarında ve hareketsiz sertliğindedir. Ancak suyun hiçbir köşesi, hiçbir katı formu yoktur; girdiği kabın şeklini alır ama asla özünden vazgeçmez. Zaman ilerledikçe o kaskatı kaya aşınır, köşelerini kaybeder ve nihayetinde unufak olup nehrin tabanındaki kum tanelerine karışır. Çünkü tabiatta mutlak sertlik aslında kırılganlıktır; yumuşaklık ve esneklik ise en uzun soluklu mukavemettir.</p>
+          <p>Malzemenin mekaniğinde de bu kural değişmez. Tavlanmış çelik çubukları ele alalım; soğukken serttir, biçim vermeye kalktığınızda iç gerilimi yüzünden çatlar veya kırılır. Ancak onu yüksek ısıyla karşılaştırdığınızda akkor hale gelir, katılığı dağılır, yumuşar ve istenen forma girer. Suyla veya havayla kontrollü soğutulduğunda ise o kör geriliminden arınmış olur. İnsanın dünyayla kurduğu temas da böyledir: Karşımıza çıkan engelleri şahsi birer düşman ilan edip onlara öfkeyle çarptığımızda kırılan taraf daima kendi zihnimiz olur.</p>
+          <p>Bizler hem maddi dünyada hem de zihnimizin evreninde sürekli olarak akışın yönünü zorla değiştirmeye, nehre ters yüzmeye çalışıyoruz. Oysa engelleri yok edilmesi gereken birer hasım olarak görmek yerine onların tabiatını soğukkanlılıkla tahlil etmek gerekir. Nehrin bilgeliği, köşelere takılmadan yolunu bulabilme disiplinindedir. Kibrin sert kabuğunu kırıp su gibi esnek kalmayı başaran bir zihni hiçbir kaya durduramaz.</p>
         `
       },
       'bataklik-ve-lotus': {
         category: 'Varlık & Neden',
         catKey: 'varlik-neden',
         title: 'Bataklık ve Lotus: Çamurun Ortasında Özü Korumak',
-        date: 'Kayıt: VRN-01 &bull; Ankara',
+        date: 'Kayıt: VRN-01 • Ankara',
+        desc: 'Dünyadan kaçarak değil; kirlenmenin ortasında durup onun zehrini kendi içine almayı reddederek var olmak.',
         content: `
-          <p>Bataklıkta açan bir lotus, suyunu ve besinini çamurdan alır ama yapraklarına tek bir damla çamur yapışmaz. İnsanın bu devirde özünü ve merhametini koruması da böyledir: Dünyadan kaçarak değil, o çürümenin tam ortasında durup onun zehrini kendi içine almayı reddederek var olmak[cite: 9].</p>
-          <p>Lotus, kök saldığı çamurdan nefret etmez[cite: 9]. Bilir ki kökünü o çamurun dibine salmazsa, güneşe uzanacak gövdeyi bulamaz[cite: 9]. İnsanın kötülükten ve cehaletten arınması; steril, dünyadan koparılmış bir fanusta oturarak gerçekleşmez[cite: 9]. Çamur zaten oradadır; mesele, onu besin olarak kullanıp onun rengine boyanmamaktır[cite: 9]. Çamur bir zemin, bir koşuldur; insanın görevi o zeminle savaşmak değil, o zeminin üzerinde kendi formunu korumaktır[cite: 9].</p>
-          <p>İnsanların en büyük kurnazlığı ise şudur: <em>"Dünya zaten kirli, herkes menfaat peşinde, ben neden dürüst kalayım?"</em> diyerek kendi merhametsizliğine kılıf uydururlar[cite: 9]. Bu, lotusun çamura teslimiyetinden başka bir şey değildir[cite: 9]. Oysa öz; dışarının pisliğiyle kirlenecek kadar zayıf değildir[cite: 9]. Dışarının pisliğiyle kirlenecek kadar zayıf olan şey ancak tohumu çürümüş bir iradedir; insan ancak kendi isteğiyle o zehri tohumuna taşırsa çürür[cite: 9].</p>
-          <p>Yaprağın çamuru tutmaması bir tesadüf değildir; yüzeyindeki mikroskobik dokunun, yani merhamete duyulan öz-disiplinin sonucudur[cite: 9]. Dışarıdan gelen her öfke, lotusun yaprağına çarpan çamurlu su damlası gibidir: Gelir, çarpar ve tutunamadan aşağı kayar[cite: 9]. İntikam peşinde koşulmaz, öfkeye öfkeyle karşılık verilmez; sadece içe işlemesine izin verilmez[cite: 9]. Merhamet bir zaaf değil, tam aksine çamurun içinde açabilen yaprağın yüzey gerilimidir[cite: 9].</p>
+          <p>Bataklığın en karanlık, en çamurlu noktasında açan bir lotus çiçeğini gözlemlediğinizde doğanın kurduğu muazzam dengeyi görürsünüz. Lotus, hayatta kalabilmek için ihtiyaç duyduğu bütün besini ve suyu o balçıktan çeker; ancak yapraklarına baktığınızda tek bir zerre kir, tek bir çamur lekesi bulamazsınız. İnsanın bu çağda kendi ahlakını, merhametini ve öz disiplinini koruma mücadelesi de tam olarak böyledir: Dünyadan ve toplumdan kaçarak değil; yozlaşmanın ve kirlenmenin tam göbeğinde durup onun zehrini kendi içine almayı katiyetle reddederek var olmak.</p>
+          <p>Lotus çiçeği, içinde filizlendiği çamurdan nefret etmez. Gayet iyi bilir ki kökünü o bataklığın derinliklerine kadar salmazsa, göğe doğru uzanacak o güçlü gövdeyi ve açacak çiçeği inşa edemez. İnsanın kötülükten, riyadan ve cehaletten korunması da laboratuvar ortamında steril bir fanusa kapanarak sağlanamaz. Çamur zaten hayatın doğal bir bileşeni olarak oradadır; sokaktadır, ilişkilerdedir, gündelik hayatın sürtünmesindedir. Asıl marifet, o çamuru hayatın bir gerçeği olarak kabul edip onun rengine, onun kokusuna boyanmadan ayakta kalabilmektir.</p>
+          <p>İnsanların en yaygın ve en konforlu kurnazlığı ise şu bildik bahanenin ardına sığınmaktır: "Dünya zaten kirlenmiş, herkes kendi çıkarının peşinde koşuyor, ben niye dürüst kalayım?" Bu yaklaşım, zayıf bir iradenin çamura gönüllü teslimiyetinden başka bir şey değildir. Kendi tembelliğini ve merhametsizliğini çağın çürümesine fatura eden insan, aslında en başından kirlenmeye dünden razıdır. Oysa insanın özü, dışarıdan gelen dedikoduyla, iftirayla veya bayağılıkla kirlenecek kadar aciz değildir. İnsan, ancak kendi rızasıyla o zehri yudumlamaya başladığında çürür.</p>
+          <p>Lotus yaprağının suyu ve çamuru üzerinde tutmaması bir rastlantı değil; yüzeyindeki mikroskobik dokunun, yani fiziksel yapısının doğal sonucudur. Ahlaki düzlemde bu mikroskobik doku, insanın kendine uyguladığı ödünsüz öz disiplindir. Dışarıdan üzerinize sıçrayan her nefret, her çiğ öfke ve kaba söz; lotus yaprağına düşen çamurlu bir yağmur damlası gibi olmalıdır: Gelir, çarpar ve tutunamadan aşağıya yuvarlanır. İntikam peşinde koşulmaz, öfkeye öfkeyle karşılık verilerek zihin kirletilmez; sadece onun içe işlemesine, tohumu zehirlemesine izin verilmez.</p>
         `
       },
       'kibir-motoru': {
         category: 'Kamusal Meseleler',
         catKey: 'kamusal-meseleler',
         title: 'Kibir Motoru ve Kitlelerin Merhametsizleşmesi',
-        date: 'Kayıt: KMS-01 &bull; Ankara',
+        date: 'Kayıt: KMS-01 • Ankara',
+        desc: 'Kitleleri güden kurumsal ve ideolojik yapılar, neden her şeyden önce bireysel merhameti ve vicdanı tasfiye eder?',
         content: `
-          <p>Kitleleri güden ideolojiler ya da dogmatik yapılar, neden her şeyden önce bireysel merhameti yok eder?[cite: 7] Koruma, aidiyet ve güvende hissetme refleksiyle yola çıkan insan; nasıl olur da en temel erdemini unutup, mensubu olduğu grubun kibriyle hareket eden bir saldırgana dönüşür?[cite: 7] İnsani erdemler krizdeyken bu devirde bir üstünlük yarışı gözlemek kaçınılmazdır; çünkü kibir bu devrin erdeminin ana motoru olmuştur[cite: 8].</p>
-          <p>Kitleleri merhametten ayırmak sürdürülebilir bir güç mekanizması yaratır[cite: 7]. Bir araya gelen topluluk, kendi varlığını meşrulaştırmak için sürekli "öteki" üretmek zorundadır[cite: 7]. Zihin bu döngüye girdiğinde her hareketi haklı, her kibri meşru görmeye başlar[cite: 7]. Adalet ve erdem iddiasıyla yola çıkan yapılar; günün sonunda sadece kendi varlığını sürdürmeyi amaçlayan birer kibir motoruna dönüşür. Savaşmaktaki kibir motorunda bulunmaktayız; insan dahi sormadan edemiyor, neden?[cite: 8]</p>
-          <p>Bana göre bu sorunun cevabı açıktır: İnsan ne bir kontrol altında tutulması gereken vahşi bir hayvandır ne de dünyada mutlak hükümranlık için yaratılmış bir varlıktır[cite: 8]. Tarih boyunca insanın en büyük zaafı, bu iki inanç oldu[cite: 8]. Biri, kendini diğer canlılardan ve insanlardan üstün görüp kast sistemleri kurmak; diğeri ise insanı sadece katı normlarla terbiye edilmesi gereken tehlikeli bir varlık saymak[cite: 8]. İki anlayışta da ortak olan şey şudur: İnsanı kontrol altında tutulması gereken mekanik bir nesneye indirgerler[cite: 8].</p>
-          <p>Oysa kibir motorunu durdurmadıkça, biriktirilen unvanların ve kurulan tahakkümün insana getireceği tek şey daha derin bir çürümedir[cite: 7, 8]. Eğer bir fikir bir insanı başka bir canlıya zarar vermeye öğütlüyorsa, bu en başta kendi özüne yöneltilmiş bir tehdittir[cite: 7]. Gerçek barış dünyayı dönüştürmek değil; birbirimizi anlamaktan en azından anlamaya çalışmaktan geçer ki erdemli bir toplum kurulabilsin[cite: 7].</p>
+          <p>Kitleleri sevk ve idare eden ideolojiler, dogmatik inançlar ve katı kurumsal yapılar; neden her şeyden önce insanın en temel vasfı olan bireysel merhameti tasfiye eder? Başlangıçta topluluğu koruma, bir arada tutma ve güvende hissettirme vaadiyle yola çıkan mekanizmalar; nasıl olur da mensuplarını kendi vicdanını bir kenara bırakmış, organize birer saldırgana dönüştürür? Günümüz dünyasında erdem kavramının derin bir kriz yaşadığını görüyoruz; çünkü bireysel tevazu unutulmuş, yerini topluluk aidiyetinden beslenen devasa bir kibir motoru almıştır.</p>
+          <p>Bir yapının kitleleri bir arada tutabilmesi için merhameti sistemli biçimde devreden çıkarması gerekir. Çünkü merhamet sorgulatır, duraksatır, ötekinin acısını hissettirir. Oysa bir güç mekanizmasının bekası, sürekli olarak bir "düşman" veya "öteki" üretmeye bağımlıdır. Zihin bir kere bu kolektif üstünlük yanılsamasına kapıldığında; mensubu olduğu yapının her türlü zorbalığını meşru, her türlü kibrini kutsal görmeye başlar. Adalet, eşitlik veya ahlak bayrağıyla yola çıkan hareketlerin günün sonunda kendi varlığını sürdürmekten başka hiçbir amacı kalmayan soğuk birer iktidar aygıtına dönüşmesi bundandır.</p>
+          <p>Tarihin sayfalarını çevirdiğimizde insanlığın iki büyük yanılgı arasında savrulduğunu tespit ederiz: İlk yanılgı; insanın kendini evrenin mutlak efendisi, diğer tüm canlıların ve hatta diğer insanların üzerinde egemenlik kurmaya hakkı olan bir varlık sanmasıdır. Bu kibir kast sistemlerini, ırkçı hiyerarşileri ve sömürge düzenlerini doğurmuştur. İkinci yanılgı ise; insanı yalnızca bastırılması, katı normlarla terbiye edilmesi ve cezalandırılması gereken tehlikeli bir mekanik nesneye indirgemektir. Birbirine zıt gibi görünen bu iki yaklaşım da aynı kapıya çıkar: İnsanın içsel özünü yok sayar ve onu kontrol altında tutulacak bir tebaaya çevirir.</p>
+          <p>Oysa insan ne tabiatın mutlak hükümdarıdır ne de kurallarla güdülecek bir köledir. Toplulukların içine düştüğü bu kibir motorunu durdurmadıkça, biriktirilen makamların, çekilen sınırların ve kazanılan güç mücadelelerinin getireceği tek sonuç daha derin bir barbarlıktır. Bir doktrin, insana başka bir canlının haysiyetini çiğnemeyi öğütlüyorsa, o doktrin en başta insanın kendi fıtratına açılmış bir savaştır. Toplumsal diriliş, kitlelerin kör sloganlarında değil; insanın kendi sınırlarını idrak edip ötekine merhametle yaklaşabilme cesaretinde saklıdır.</p>
         `
       },
       'dunyanin-sefasi': {
         category: 'Varlık & Neden',
         catKey: 'varlik-neden',
         title: 'Dünyanın Cefası ve Kaçış Yanılgısı',
-        date: 'Kayıt: VRN-02 &bull; Ankara',
+        date: 'Kayıt: VRN-02 • Ankara',
+        desc: 'Kurtuluşu steril köşelerde veya soyut felsefelerde aramak yerine hayatın çıplak ve sert gerçekliğiyle yüzleşmek.',
         content: `
-          <p>Dünyanın cefası gerçeği, inkâr edilemez bir hakikattir. Ancak bu acı gerçeği romantize edilmiş bir manifesto gibi okumak insanı çözüme götürmez[cite: 12]. Gerçek kurtuluş; hiçbir zaman sadece tapınaktaki bir keşişe, dağ başındaki münzeviye veya gündelik hayattan soyutlanmış steril köşelere hediye edilmez[cite: 12].</p>
-          <p>Zihnimiz, kurtuluşu öyle bir odaya hapsetti ki bu dünyada anlam ifade etmeyen soyut bir metafiziğe indirgedi[cite: 12]. Bizi ve dünyayı boğan en tehlikeli tuzak da budur zaten[cite: 12]. Zihindeki kurtuluş masallarına sığınarak hayatı bir kalıba sokamazsınız[cite: 12]. Dünyayı merhametle dönüştürmek zorundayız; çünkü çoğumuzun zihninde dünya sadece bir acı diyarı iken, merhamet ise bunun sadece tesellisi veya öteki taraf için kabulleniş aracı olarak görülüyor[cite: 12].</p>
-          <p>Oysa işin büyüklüğü burada başlıyor: Merhameti delillerden çıkardığınız zaman geriye saf acı kalır ve bu doğru bir gözlem ama acıyı acı ile çözmeye çalıştığınız için o acının en büyük kölesi ve yapıcısı olursunuz[cite: 12]. Acıdan kaçarak değil, acının doğasını anlayarak yaşamak gerekir[cite: 12].</p>
-          <p>Merhamet denilen şey soyut bir duygu gösterisi değildir[cite: 12]. Acıyı acıyla çözmeye çalışmak yerine; onu soğukkanlılıkla gözlemlemek, nedenlerini kavramak ve hayatın olağan döngüsü içinde karşılamak gerekir[cite: 12]. Kaçış bir arınma sağlamaz; zihni sadece yeni yanılsamaların kucağına iter[cite: 12].</p>
+          <p>Dünyanın cefası, yani varoluşun ham gerçeği olan ıstırap, inkâr edilemez bir fiziki olgudur. İnsan doğar, yaşlanır, hastalanır, sevdiklerini kaybeder ve nihayetinde yok olur. Ancak bu çıplak hakikati romantize edilmiş bir edebiyat kederine veya fildişi kulelerde üretilen melankolik manifestolara dönüştürmek kimseye bir kurtuluş sağlamaz. Gerçek arınma; hiçbir zaman gündelik hayattan elini eteğini çekip bir tapınağın kuytusuna sığınan münzeviye ya da kendini steril odalara kilitleyip hayatın tozundan kaçan teorisyene bahşedilmemiştir.</p>
+          <p>Modern zihin, kurtuluş fikrini öyle soyut bir metafiziğe hapsetti ki acıyı neredeyse bu dünyayla bağı kopmuş kuramsal bir tartışma haline getirdi. Bizi ve yaşadığımız toplumu nefessiz bırakan en tehlikeli tuzak da tam burada kurulur. Zihnimizin kurduğu soyut hayallere sığınarak hayatın sert köşelerinden kaçabileceğimizi sanırız. Acıyı sadece kabullenilmesi gereken mistik bir kader veya öteki dünya için katlanılan bir borç senedi gibi görmek, onu çözme iradesini insanın elinden alır. Merhameti sahadan, pratikten ve ilişkilerden çekip aldığınızda geriye sadece saf ve çıplak bir acı kalır.</p>
+          <p>En vahim hata ise acıyı başka bir acıyla tedavi etmeye çalışmaktır. Haksızlığa haksızlıkla, kabalığa kabalıkla karşılık veren insan; yakındığı o karanlık düzenin en sadık taşıyıcısı haline gelir. Acıdan korkup kaçmak veya ona teslim olup saldırganlaşmak yerine; onun maddi nedenlerini, kaynağını ve insanda bıraktığı izleri soğukkanlı bir cerrah dikkatiyle gözlemlemek şarttır. Acı, hayatın doğal sürtünme payıdır; onunla savaşmak rüzgara karşı yumruk savurmaya benzer.</p>
+          <p>Gerçek manevi olgunluk; dünyanın çelişkilerle dolu olduğunu bilerek, her an ayağımızın taşa takılabileceğini kabul ederek yine de o yolda dengeli yürüyebilme sanatıdır. Hayatın cefasından kaçış yoktur; ancak o cefayı metanetle göğüsleyen, acının karşısına sarsılmaz bir merhamet ve bilinçle çıkan insan için dünya artık bir hapishane değil, bilenecek bir tezgâhtır.</p>
         `
       },
       'tarihsel-zafiyet': {
         category: 'Kamusal Meseleler',
         catKey: 'kamusal-meseleler',
         title: 'Tarihsel Zafiyet: Kast, Tahakküm ve İnsanın Sınırları',
-        date: 'Kayıt: KMS-02 &bull; Ankara',
+        date: 'Kayıt: KMS-02 • Ankara',
+        desc: 'İnsanın kendisini evrenin mutlak efendisi sanması ile kurduğu hiyerarşik sömürü mekanizmaları arasındaki yapısal bağ.',
         content: `
-          <p>Tarih boyunca insan ırkının en büyük zaafı, kendini diğer varlıkların ve hemcinslerinin üstünde konumlandırma arzusudur[cite: 8]. Maalesef bu üstünlükçü bakış açısı öyle seviyelere taşınmıştır ki kendi içinde kast sistemleri, ırki ayrımlar yapmaya kalkışılmıştır[cite: 8]. Bunlar bize verilen öze edilen hakaretin bir yüzüdür[cite: 8]. Diğer tarafa baktığımızda ise insanı ilkel normlarla yorumlayan bir sığlık görürüz ve bu anlayışlar zıt görünse dahi aynı şeyi yaparlar: Merhamet ve temel insani duyguları engeller altına alırlar[cite: 8].</p>
-          <p>İnsanın, dünyanın ve evrenin başlangıcı büyük bir sırdı; İbrahimi inançta Tanrı, Darwinist teoride evrim ve daha niceleri...[cite: 16] Ama en temel fikre geri indiğimizde görürüz ki insanlık hep sabit ve peşin inançlarla geri adımlarla kendi sonunu hazırladı[cite: 16]. Tarih bize öze ters düştüğümüz anda yaşadığımız felaketlerin boyunu göstermesine rağmen hiçbir çağda bu kadar ileri gidememiştik[cite: 16]. Üstümüzde bulut olan bir suya toz attığımızda ne olur? Su bulanır[cite: 16]. Öze korumak için suyun en temel niteliğini unutmamak gerekir[cite: 16].</p>
-          <p>Toplumsal değerleri savunmak adına yapılan eylemler eğer kurtarıcılık adı altında bir sömürgeye dönüşüyorsa, orada özü korumaktan ziyade kurumsal bir tahakküm üretilir[cite: 16]. Konfüçyüs'ün de, Buda'nın da, kadim bilgelerin de insanlığa hatırlattığı şey buydu; fakat kitleler o öğretileri birer iktidar basamağına dönüştürdü[cite: 16]. İnsan ne yeryüzünün mutlak efendisidir ne de yalnızca itaat etmesi gereken bir tebaadır[cite: 8].</p>
-          <p>Gerçek kamusal bilinç, insanın kendi sınırlarını bilmesiyle başlar. Biriktirilen gücün ve hiyerarşilerin kibrinden arınmadıkça, toplumların varacağı yer adaletin değil, sadece daha organize bir sömürünün egemenliğidir[cite: 7, 8, 16].</p>
+          <p>İnsanlık tarihinin başından beri değişmeyen en temel zafiyet, bireyin veya zümrelerin kendilerini diğer canlıların ve hemcinslerinin üzerinde ayrıcalıklı bir konuma yerleştirme arzusudur. Gücü eline geçiren her yapı, bu üstünlük vehmini kalıcı kılabilmek adına toplumu sınıflara, kastlara, ırki ve mezhebi hiyerarşilere bölmüştür. Bir insanın doğumuyla birlikte diğerinin efendisi veya kölesi ilan edildiği bu düzenekler, insanın doğuştan getirdiği varoluşsal onura karşı girişilmiş en organize suçlardır. Bu anlayış insanı ya kör bir itaate mahkûm edilecek bir iş gücü ya da gerektiğinde harcanacak bir istatistik olarak kaydeder.</p>
+          <p>Evrenin ve insanın varoluşuna dair kadim tartışmaları hatırlayalım; ister dini anlatıların yaratılış nazariyesiyle bakalım, ister biyolojik evrimin maddi yasalarıyla... Hangi kökene inerseniz inin karşınıza çıkan temel hakikat tektir: İnsan, koca bir ekosistemin ve nedensellik ağının yalnızca mütevazı bir parçasıdır. Ne var ki insanlık, bu yalın gerçeği her unuttuğunda kendi eliyle inşa ettiği felaketlerin kurbanı olmuştur. Berrak bir suyun içine avuçla çamur attığınızda nasıl ki suyun tabiatını bozar, dipteki taşları görünmez kılarsanız; toplumsal düzenin temeline tahakküm hırsını koyduğunuzda da adaleti ve vicdanı aynı şekilde bulandırırsınız.</p>
+          <p>Tarih boyunca büyük bilgelerin, düşünürlerin ve kurucu seslerin insanlığa bıkıp usanmadan hatırlattığı en temel ilke şuydu: Sınırını bilmek. Ancak kitleler bu evrensel çağrıları bile zamanla tahrif etmiş; dayanışma ve adalet için kurulan öğretileri kendi dar zümrelerinin iktidar basamağı haline getirmiştir. Bir fikrin veya yapının büyüklüğü, kontrol ettiği ordularla ya da biriktirdiği sermayeyle değil; en zayıf ferdine reva gördüğü muameleyle ölçülür. Toplumları ayakta tutan asıl harç, tepeden dayatılan yasakların korkusu değil, müşterek bir adalet duygusudur.</p>
+          <p>Kendi mülkiyet ve üstünlük kibrinden arınamayan hiçbir nizam sürdürülebilir olamaz. Kurumsal kibrin ve sınıfsal ayrımların pençesinde kıvranan bir toplumun varacağı menzil adalet değil, sadece daha organize, daha mekanik bir sömürü düzenidir. Çıkış yolu; insanın kendini dünyanın merkezi sanmaktan vazgeçip haddini bilmesinde ve kamusal alanı tahakkümün değil, eşit ve onurlu bir paylaşımın zemini kılabilmesindedir.</p>
         `
       }
     };
+    /*POSTS_DATA_END*/
 
+    // ================= MENÜ & SAYFA YÖNETİMİ =================
     let previousPage = 'home';
+
+    function renderPostLists() {
+      const homeList = document.getElementById('home-post-list');
+      const catLists = {
+        'gozlemler': document.getElementById('list-gozlemler'),
+        'varlik-neden': document.getElementById('list-varlik-neden'),
+        'kamusal-meseleler': document.getElementById('list-kamusal-meseleler')
+      };
+
+      if (!homeList) return;
+      homeList.innerHTML = '';
+      Object.values(catLists).forEach(el => { if(el) el.innerHTML = ''; });
+
+      for (const [id, post] of Object.entries(posts)) {
+        const itemHtml = `
+          <li>
+            <a class="article-link" onclick="openPost('${id}')">${post.title}</a>
+            <span class="article-desc">${post.desc}</span>
+          </li>
+        `;
+        homeList.innerHTML += itemHtml;
+        if (catLists[post.catKey]) {
+          catLists[post.catKey].innerHTML += itemHtml;
+        }
+      }
+    }
 
     function navigateTo(pageId) {
       document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
@@ -739,6 +839,186 @@
     function goBackFromPost() {
       navigateTo(previousPage || 'home');
     }
+
+    // ================= GÜVENLİ İÇ EDİTÖR SİSTEMİ =================
+    const ADMIN_PASS = "calik2026";
+
+    function openAdminGate() {
+      navigateTo('admin');
+      document.getElementById('admin-auth-box').style.display = 'block';
+      document.getElementById('admin-editor-box').style.display = 'none';
+      document.getElementById('authErrorMsg').style.display = 'none';
+      document.getElementById('adminPasswordInput').value = '';
+
+      // Varsa kaydedilmiş GitHub ayarlarını yükle
+      document.getElementById('ghUser').value = localStorage.getItem('calik_gh_user') || '';
+      document.getElementById('ghRepo').value = localStorage.getItem('calik_gh_repo') || '';
+      document.getElementById('ghToken').value = localStorage.getItem('calik_gh_token') || '';
+    }
+
+    function verifyAdminPassword() {
+      const entered = document.getElementById('adminPasswordInput').value;
+      if (entered === ADMIN_PASS) {
+        document.getElementById('admin-auth-box').style.display = 'none';
+        document.getElementById('admin-editor-box').style.display = 'block';
+      } else {
+        document.getElementById('authErrorMsg').style.display = 'block';
+      }
+    }
+
+    function logoutAdmin() {
+      openAdminGate();
+      navigateTo('home');
+    }
+
+    function saveGhSettings() {
+      localStorage.setItem('calik_gh_user', document.getElementById('ghUser').value.trim());
+      localStorage.setItem('calik_gh_repo', document.getElementById('ghRepo').value.trim());
+      localStorage.setItem('calik_gh_token', document.getElementById('ghToken').value.trim());
+      const s = document.getElementById('ghSaveStatus');
+      s.style.display = 'inline';
+      setTimeout(() => { s.style.display = 'none'; }, 2000);
+    }
+
+    // Doğrudan GitHub API Üzerinden Otomatik Commit Eden Mekanizma
+    async function publishDirectlyToGitHub() {
+      const user = document.getElementById('ghUser').value.trim();
+      const repo = document.getElementById('ghRepo').value.trim();
+      const token = document.getElementById('ghToken').value.trim();
+      const statusEl = document.getElementById('publishStatusMsg');
+
+      if (!user || !repo || !token) {
+        alert("Lütfen önce '[+] GitHub Otomatik Yayınlama Ayarları' kutusuna Kullanıcı Adı, Depo ve Token bilgilerinizi girip kaydedin.");
+        return;
+      }
+
+      const id = document.getElementById('newPostId').value.trim() || 'yazi-' + Date.now();
+      const title = document.getElementById('newPostTitle').value.trim();
+      const catKey = document.getElementById('newPostCat').value;
+      const catName = document.getElementById('newPostCat').options[document.getElementById('newPostCat').selectedIndex].text;
+      const date = document.getElementById('newPostDate').value.trim();
+      const desc = document.getElementById('newPostDesc').value.trim();
+      const rawContent = document.getElementById('newPostContent').value.trim();
+
+      if (!title || !rawContent) {
+        alert("Lütfen başlık ve metin alanını doldurun.");
+        return;
+      }
+
+      statusEl.style.color = '#000080';
+      statusEl.innerText = "GitHub'a bağlanılıyor ve dosya alınıyor...";
+
+      try {
+        // 1. Mevcut index.html dosyasını GitHub'dan çek
+        const getRes = await fetch(`https://api.github.com/repos/${user}/${repo}/contents/index.html`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/vnd.github.v3+json'
+          }
+        });
+
+        if (!getRes.ok) throw new Error("Dosya alınamadı. Token veya Depo adını kontrol edin.");
+        const fileData = await getRes.json();
+        const currentSha = fileData.sha;
+        const currentContent = decodeURIComponent(escape(atob(fileData.content)));
+
+        // 2. Yeni yazıyı formatla
+        const formattedContent = rawContent.split(/\n\s*\n/).map(p => `          <p>${p.trim()}</p>`).join('\n');
+        const newPostEntry = `
+      '${id}': {
+        category: '${catName}',
+        catKey: '${catKey}',
+        title: '${title.replace(/'/g, "\\'")}',
+        date: '${date.replace(/'/g, "\\'")}',
+        desc: '${desc.replace(/'/g, "\\'")}',
+        content: \`
+${formattedContent}
+        \`
+      },`;
+
+        // 3. Dosyanın içindeki const posts = { satırının hemen ardına ekle
+        const updatedContent = currentContent.replace("const posts = {", "const posts = {" + newPostEntry);
+
+        statusEl.innerText = "Yazı dosyaya eklendi, GitHub'a commit atılıyor...";
+
+        // 4. Güncellenmiş dosyayı geri yükle (Commit)
+        const putRes = await fetch(`https://api.github.com/repos/${user}/${repo}/contents/index.html`, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            message: `Kayıt Eklendi: ${title}`,
+            content: btoa(unescape(encodeURIComponent(updatedContent))),
+            sha: currentSha
+          })
+        });
+
+        if (!putRes.ok) throw new Error("Commit başarısız oldu.");
+
+        statusEl.style.color = 'green';
+        statusEl.innerText = "✓ BAŞARILI! Yazı GitHub'a yüklendi ve yayınlandı. Sayfa 1-2 dakika içinde güncellenecektir.";
+
+        // Formu temizle
+        document.getElementById('newPostTitle').value = '';
+        document.getElementById('newPostDesc').value = '';
+        document.getElementById('newPostContent').value = '';
+      } catch (err) {
+        statusEl.style.color = '#990000';
+        statusEl.innerText = "Hata oluştu: " + err.message;
+      }
+    }
+
+    // Manuel / Yedek Kod Çıkarıcı
+    function generatePostCode() {
+      const id = document.getElementById('newPostId').value.trim() || 'yeni-yazi';
+      const title = document.getElementById('newPostTitle').value.trim();
+      const catKey = document.getElementById('newPostCat').value;
+      const catName = document.getElementById('newPostCat').options[document.getElementById('newPostCat').selectedIndex].text;
+      const date = document.getElementById('newPostDate').value.trim();
+      const desc = document.getElementById('newPostDesc').value.trim();
+      const rawContent = document.getElementById('newPostContent').value.trim();
+
+      if (!title || !rawContent) {
+        alert("Lütfen başlık ve metin alanını doldurun.");
+        return;
+      }
+
+      const formattedContent = rawContent.split(/\n\s*\n/).map(p => `          <p>${p.trim()}</p>`).join('\n');
+
+      const codeString = `      '${id}': {
+        category: '${catName}',
+        catKey: '${catKey}',
+        title: '${title.replace(/'/g, "\\'")}',
+        date: '${date.replace(/'/g, "\\'")}',
+        desc: '${desc.replace(/'/g, "\\'")}',
+        content: \`
+${formattedContent}
+        \`
+      },`;
+
+      document.getElementById('generatedOutputCode').value = codeString;
+      document.getElementById('generatedOutputWrap').style.display = 'block';
+    }
+
+    function copyGeneratedCode() {
+      const copyText = document.getElementById("generatedOutputCode");
+      copyText.select();
+      navigator.clipboard.writeText(copyText.value);
+      alert("Kod panoya kopyalandı!");
+    }
+
+    // Klavye Kısayolu: Ctrl + Shift + E
+    document.addEventListener('keydown', function(e) {
+      if (e.ctrlKey && e.shiftKey && (e.key === 'E' || e.key === 'e')) {
+        e.preventDefault();
+        openAdminGate();
+      }
+    });
+
+    renderPostLists();
   </script>
 
 </body>
