@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>calik.in — Kerem Çalık</title>
+  <style>
+    /* 90'lar sonu / 2000'ler başı bağımsız brutalist web estetiği */
+    * { box-sizing: border-box; }
+    body {
+      background-color: #dcd8cf;
+      color: #111111;
+      font-family: "MS PGothic", "Courier New", monospace, serif;
+      margin: 0;
+      padding: 10px;
+      font-size: 13.5px;
+      line-height: 1.55;
+    }
+
+    .wrapper {
+      max-width: 840px;
+      margin: 0 auto;
+    }
+
+    /* Kayan Üst Bilgi Şeridi */
+    .retro-ticker {
+      background-color: #000080;
+      color: #ffffff;
+      padding: 3px 8px;
+      font-size: 11px;
+      margin-bottom: 8px;
+      border: 1px solid #000;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    /* Üst Tabela / Banner */
+    .top-banner {
+      background-color: #ffffff;
+      border: 3px double #003399;
+      padding: 10px 14px;
+      margin-bottom: 12px;
+    }
+
+    .banner-grid {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .banner-title {
+      font-size: 20px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      color: #000000;
+    }
+
+    .banner-sub {
+      font-size: 11.5px;
+      color: #333333;
+      text-align: right;
+      line-height: 1.4;
+    }
+
+    /* İki Sütunlu Sayfa Düzeni */
+    .layout-grid {
+      display: flex;
+      gap: 14px;
+    }
+
+    /* Sol Menü (Sidebar) */
+    .sidebar {
+      width: 145px;
+      flex-shrink: 0;
+      border-right: 2px solid #888888;
+      padding-right: 12px;
+      font-size: 12.5px;
+    }
+
+    .sidebar-menu {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar-menu li {
+      margin-bottom: 9px;
+    }
+
+    .sidebar-menu li a {
+      cursor: pointer;
+      display: inline-block;
+      text-decoration: underline;
+      color: #0000cc;
+    }
+
+    .sidebar-menu li a:visited {
+      color: #551a8b;
+    }
+
+    .sidebar-menu li a:hover {
+      background-color: #ffff99;
+    }
+
+    .sidebar-menu li::before {
+      content: "◆ ";
+      color: #b22222;
+      font-size: 9px;
+    }
+
+    /* Sağ Ana İçerik */
+    .main-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* 3D Kabartmalı Çizgi */
+    hr.bevel {
+      border: 0;
+      height: 4px;
+      background: #777;
+      border-bottom: 1px solid #ffffff;
+      margin: 12px 0;
+    }
+
+    /* Bölüm Rozetleri */
+    .section-badge {
+      background-color: #24413e;
+      color: #ffffff;
+      display: inline-block;
+      padding: 2px 8px;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    /* Sayfa Ekmek Kırıntısı (Breadcrumb) */
+    .breadcrumb {
+      font-size: 11px;
+      color: #555;
+      margin-bottom: 8px;
+      padding-bottom: 4px;
+      border-bottom: 1px dotted #888;
+    }
+
+    /* Yazı Listesi */
+    .article-list {
+      list-style-type: none;
+      padding-left: 2px;
+      margin: 4px 0 16px 0;
+    }
+
+    .article-list li {
+      margin-bottom: 12px;
+    }
+
+    .article-link {
+      font-weight: bold;
+      cursor: pointer;
+      color: #0000cc;
+      text-decoration: underline;
+      font-size: 13.5px;
+    }
+
+    .article-link:hover {
+      background-color: #ffff99;
+    }
+
+    .article-list li::before {
+      content: "◇ ";
+      color: #990000;
+      font-weight: bold;
+      font-size: 11px;
+    }
+
+    .article-desc {
+      display: block;
+      color: #444444;
+      font-size: 11.5px;
+      padding-left: 16px;
+      margin-top: 3px;
+    }
+
+    /* Bağlantı Stilleri */
+    a {
+      color: #0000cc;
+      text-decoration: underline;
+    }
+
+    a:visited {
+      color: #551a8b;
+    }
+
+    a:hover {
+      background-color: #ffff99;
+    }
+
+    /* Metin & Belge Kutuları */
+    .paper-box {
+      background: #faf8f5;
+      border: 1px solid #999;
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+
+    .quote-box {
+      background: #f4f1eb;
+      border-left: 4px solid #24413e;
+      border-top: 1px solid #ccc;
+      border-right: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+      padding: 12px 14px;
+      margin-bottom: 14px;
+      font-style: normal;
+    }
+
+    .quote-author {
+      font-size: 11.5px;
+      color: #666;
+      text-align: right;
+      margin-top: 6px;
+      font-weight: bold;
+    }
+
+    /* Retro Kitap Kapağı Çerçevesi */
+    .book-card {
+      background: #faf8f5;
+      border: 1px solid #999;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+
+    .book-cover-frame {
+      float: left;
+      margin: 0 14px 10px 0;
+      border: 1px solid #333333;
+      padding: 2px;
+      background: #ffffff;
+      box-shadow: 2px 2px 0px #888888;
+    }
+
+    .book-cover-img {
+      display: block;
+      width: 85px;
+      height: 125px;
+      object-fit: cover;
+      filter: contrast(105%);
+    }
+
+    .counter-box {
+      border: 1px solid #666;
+      background: #eee;
+      display: inline-block;
+      padding: 2px 6px;
+      font-family: monospace;
+      font-weight: bold;
+      color: #990000;
+      font-size: 11px;
+    }
+
+    .footer {
+      font-size: 11px;
+      color: #555555;
+      text-align: center;
+      margin-top: 24px;
+      padding: 10px 0;
+    }
+
+    .page-section {
+      display: none;
+    }
+
+    .page-section.active {
+      display: block;
+    }
+
+    @media (max-width: 650px) {
+      .layout-grid {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 2px solid #888888;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+      }
+      .sidebar-menu {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 14px;
+      }
+      .banner-sub {
+        text-align: left;
+      }
+      .book-cover-frame {
+        float: none;
+        margin: 0 0 10px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+
+    <!-- Üst Kayan Bilgi Bandı -->
+    <div class="retro-ticker">
+      calik.in &bull; Kayıt & Gözlem &bull; Ankara &bull; 2026
+    </div>
+
+    <!-- Üst Tabela / Banner -->
+    <div class="top-banner">
+      <div class="banner-grid">
+        <div>
+          <span style="color: #b22222; font-size: 16px;">✦</span>
+          <span class="banner-title">KEREM ÇALIK</span><br>
+          <span style="font-size: 11px; color: #444;">calik.in / Kişisel Notlar ve Gözlemler</span>
+        </div>
+        <div class="banner-sub">
+          <strong>Kayıt & Gözlem</strong> &bull; Ankara<br>
+          İrtibat: <a href="mailto:kerem@calik.in">kerem@calik.in</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- İki Sütunlu Sayfa Düzeni -->
+    <div class="layout-grid">
+      
+      <!-- Sol Menü (Sidebar) -->
+      <div class="sidebar">
+        <ul class="sidebar-menu">
+          <li><a onclick="navigateTo('home')">Ana Sayfa</a></li>
+          <li><a onclick="navigateTo('gozlemler')">Gözlemler</a></li>
+          <li><a onclick="navigateTo('varlik-neden')">Varlık & Neden</a></li>
+          <li><a onclick="navigateTo('kamusal-meseleler')">Kamusal Meseleler</a></li>
+          <li><a onclick="navigateTo('siirler')">Şiirler</a></li>
+          <li><a onclick="navigateTo('fihrist')">Fihrist</a></li>
+          <li><a onclick="navigateTo('hakkimda')">Hakkımda</a></li>
+          <li><a onclick="navigateTo('irtibat')">İrtibat</a></li>
+          <li><a href="https://instagram.com/kullaniciadin" target="_blank">Instagram</a></li>
+        </ul>
+
+        <hr style="border: 0; border-top: 1px solid #999; margin: 15px 0;">
+        
+        <div style="font-size: 11px; color: #444;">
+          ZİYARETÇİ:<br>
+          <span class="counter-box">001048</span><br><br>
+          <span>[calik.in]<br>Sıfır izleyici.<br>Sıfır reklam.</span>
+        </div>
+      </div>
+
+      <!-- Sağ Ana İçerik -->
+      <div class="main-content">
+
+        <!-- ================= 1. ANA SAYFA ================= -->
+        <div id="page-home" class="page-section active">
+          <div class="breadcrumb">Gezinti: Ana Sayfa</div>
+
+          <div class="paper-box" style="margin-bottom: 14px;">
+            Maddenin yapısı, sebep-sonuç ilişkileri ve gündelik hayatın mekaniği üzerine tutulmuş notlar. Biçimin işleve hizmet ettiği asgari bir yaşam disiplini ve Ankara merkezli gözlemler.
+          </div>
+
+          <hr class="bevel">
+          <span class="section-badge">SON KAYITLAR</span>
+
+          <ul class="article-list">
+            <li>
+              <a class="article-link" onclick="openPost('kaya-ve-nehir')">Kaya ve Nehir: Sertliğin Kırılganlığı, Suyun İradesi</a>
+              <span class="article-desc">Nehrin yatağındaki dev bir kayayı aşındıran şey anlık bir darbe değildir; köşelere takılmadan akabilme iradesidir.</span>
+            </li>
+            <li>
+              <a class="article-link" onclick="openPost('bataklik-ve-lotus')">Bataklık ve Lotus: Çamurun Ortasında Özü Korumak</a>
+              <span class="article-desc">Dünyadan kaçarak değil; kirlenmenin ortasında durup onun zehrini kendi içine almayı reddederek var olmak.</span>
+            </li>
+            <li>
+              <a class="article-link" onclick="openPost('kibir-motoru')">Kibir Motoru ve Kitlelerin Merhametsizleşmesi</a>
+              <span class="article-desc">Kitleleri güden kurumsal ve ideolojik yapılar, neden her şeyden önce bireysel merhameti ve vicdanı tasfiye eder?</span>
+            </li>
+            <li>
+              <a class="article-link" onclick="openPost('dunyanin-sefasi')">Dünyanın Cefası ve Kaçış Yanılgısı</a>
+              <span class="article-desc">Kurtuluşu steril köşelerde veya soyut felsefelerde aramak yerine hayatın çıplak ve sert gerçekliğiyle yüzleşmek.</span>
+            </li>
+            <li>
+              <a class="article-link" onclick="openPost('tarihsel-zafiyet')">Tarihsel Zafiyet: Kast, Tahakküm ve İnsanın Sınırları</a>
+              <span class="article-desc">İnsanın kendisini evrenin mutlak efendisi sanması ile kurduğu hiyerarşik sömürü mekanizmaları arasındaki yapısal bağ.</span>
+            </li>
+          </ul>
+
+          <hr class="bevel">
+          <span class="section-badge">ARŞİV HAKKINDA</span>
+          <p style="font-size: 12.5px; color: #333; line-height: 1.5;">
+            Bu sayfa sosyal medya algoritmalarından uzak, 2000'lerin başındaki bağımsız web mantığıyla tutulan şahsi bir not defteridir. İlgili başlıklara sol menüden ulaşabilirsiniz.
+          </p>
+        </div>
+
+        <!-- ================= 2. GÖZLEMLER ================= -->
+        <div id="page-gozlemler" class="page-section">
+          <div class="breadcrumb">Gezinti: <a onclick="navigateTo('home')">Ana Sayfa</a> &gt; Gözlemler</div>
+          <span class="section-badge">GÖZLEMLER</span>
+          <p>Maddenin fiziksel halleri, mekanik, çevre ve gündelik saha kayıtları.</p>
+
+          <ul class="article-list">
+            <li>
+              <a class="article-link" onclick="openPost('kaya-ve-nehir')">Kaya ve Nehir: Sertliğin Kırılganlığı, Suyun İradesi</a>
+              <span class="article-desc">Nehrin önüne düşen engeller, suyun aşındırma dengesi ve ısıl işlem görmüş katı maddelerin buhara dönüşümü.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- ================= 3. VARLIK & NEDEN ================= -->
+        <div id="page-varlik-neden" class="page-section">
+          <div class="breadcrumb">Gezinti: <a onclick="navigateTo('home')">Ana Sayfa</a> &gt; Varlık & Neden</div>
+          <span class="section-badge">VARLIK & NEDEN</span>
+          <p>Sebep-sonuç ilişkileri, formun geçiciliği, zihin ve asgari yaşam üzerine notlar.</p>
+
+          <ul class="article-list">
+            <li>
+              <a class="article-link" onclick="openPost('bataklik-ve-lotus')">Bataklık ve Lotus: Çamurun Ortasında Özü Korumak</a>
+              <span class="article-desc">Öz-disiplin, lotus yaprağının mikroskobik dokusu ve dışarıdan gelen kirlenmeye karşı iç koruma mekaniği.</span>
+            </li>
+            <li>
+              <a class="article-link" onclick="openPost('dunyanin-sefasi')">Dünyanın Cefası ve Kaçış Yanılgısı</a>
+              <span class="article-desc">Acıyı soyut bir metafiziğe indirgemeden, gündelik hayatın içinde kalarak kavrama disiplini.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- ================= 4. KAMUSAL MESELELER ================= -->
+        <div id="page-kamusal-meseleler" class="page-section">
+          <div class="breadcrumb">Gezinti: <a onclick="navigateTo('home')">Ana Sayfa</a> &gt; Kamusal Meseleler</div>
+          <span class="section-badge">KAMUSAL MESELELER</span>
+          <p>Toplumsal düzen, planlama, üretim, üçüncü dünya ve güncel meseleler.</p>
+
+          <ul class="article-list">
+            <li>
+              <a class="article-link" onclick="openPost('kibir-motoru')">Kibir Motoru ve Kitlelerin Merhametsizleşmesi</a>
+              <span class="article-desc">Kitle psikolojisi, ideolojik yapıların bireysel vicdanı yok etme süreci ve güç aygıtlarının işleyişi.</span>
+            </li>
+            <li>
+              <a class="article-link" onclick="openPost('tarihsel-zafiyet')">Tarihsel Zafiyet: Kast, Tahakküm ve İnsanın Sınırları</a>
+              <span class="article-desc">İnsanı terbiye edilmesi gereken bir makineye indirgeyen hiyerarşik sistemlerin ve mülkiyet kibrinin kökleri.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- ================= 5. ŞİİRLER (SEÇME ALINTILAR) ================= -->
+        <div id="page-siirler" class="page-section">
+          <div class="breadcrumb">Gezinti: <a onclick="navigateTo('home')">Ana Sayfa</a> &gt; Şiirler</div>
+          <span class="section-badge">ŞİİRLER & ALINTILAR</span>
+          <p>Toprak, emek, sükûnet ve direniş damarından başucu mısraları:</p>
+
+          <!-- 1. Nâzım Hikmet -->
+          <div class="quote-box">
+            Demir, kömür ve şeker<br>
+            ve kırmızı bakır<br>
+            ve mensucat<br>
+            ve sevda ve zulüm ve hayat<br>
+            ve dallardaki vişneler<br>
+            ve kabarmış toprağın kokusu...<br>
+            Dayanmak gerek kök salarak toprağa,<br>
+            dayanmak gerek demir gibi tavında.
+            <div class="quote-author">— Nâzım Hikmet</div>
+          </div>
+
+          <!-- 2. Matsuo Bashō -->
+          <div class="quote-box">
+            Eski sessiz gölet,<br>
+            Bir kurbağa sıçrar içine,<br>
+            Ve suyun sesi dağılır rüzgarda.<br>
+            Yaz otları kalır geriye,<br>
+            Eski savaşçıların düşlerinden arta kalan.
+            <div class="quote-author">— Matsuo Bashō</div>
+          </div>
+
+          <!-- 3. Du Fu -->
+          <div class="quote-box">
+            Devlet yıkılır, dağlar ve nehirler kalır yerinde;<br>
+            Bahar gelir şehre, otlar ve ağaçlar yeşerir yine.<br>
+            Zamanın kederiyle gözyaşı döker çiçekler,<br>
+            Ayrılığın yükünden ürker gökteki kuşlar.<br>
+            Savaş ateşleri aylardır yanıyor cephede,<br>
+            Sıradan bir mektup altın değerinde evden gelince.
+            <div class="quote-author">— Du Fu (Tang Hanedanı)</div>
+          </div>
+
+          <!-- 4. İsmet Özel -->
+          <div class="quote-box">
+            Ben bir şairim ve bilirim ki taşlar<br>
+            ancak sert oldukları kadar ufalanırlar.<br>
+            Biz ki metallerin yorulma payını hesaplarız,<br>
+            bilmeyiz yorulmayı alın terimiz döküldükçe tezgaha.<br>
+            Çünkü öfke birikirse kırar kılıcın kabzasını,<br>
+            sabırla bilenmiş demir keser ancak çağın karanlığını.
+            <div class="quote-author">— İsmet Özel</div>
+          </div>
+        </div>
+
+        <!-- ================= 6. FİHRİST (6 ÇEKİRDEK ESER) ================= -->
+        <div id="page-fihrist" class="page-section">
+          <div class="breadcrumb">Gezinti: <a onclick="navigateTo('home')">Ana Sayfa</a> &gt; Fihrist</div>
+          <span class="section-badge">FİHRİST & İNCELEMELER</span>
+          <p>Okuma kayıtları, tarihsel çözümlemeler ve başucu kaynakları (6 Eser):</p>
+
+          <!-- 1. Tao Te Ching -->
+          <div class="book-card">
+            <div class="book-cover-frame">
+              <img src="https://covers.openlibrary.org/b/isbn/9780140441314-M.jpg" class="book-cover-img" alt="Tao Te Ching">
+            </div>
+            <div style="font-size: 11px; color: #666;">FHR-01 &bull; DOĞU DÜŞÜNCESİ & AKIŞ</div>
+            <h3 style="margin: 3px 0 6px 0; color: #8b1e1e;">Tao Te Ching — Laozi</h3>
+            <div style="font-size: 12.5px; line-height: 1.55; color: #222;">
+              Suyun hiçbir şeye meydan okumadan her şeyin biçimini alması bir teslimiyet değil, doğadaki kuvvetler dengesini doğru okuma sanatıdır. Nehrin yatağındaki dev bir kayayı yerinden söken şey sertliği değil, suyun köşelere takılmadan akabilme iradesidir. Sert olan kırılgandır; gerilimi içinde biriktirir ve ansızın çatlar. <em>Tao Te Ching</em>, eylemsizliği (wu wei) bir tembellik olarak değil; lüzumsuz sürtünmeden kaçınmak, doğanın sebep-sonuç döngüsüne müdahale etmeden onunla birlikte devinmek olarak açıklar.
+            </div>
+            <div style="clear: both;"></div>
+          </div>
+
+          <!-- 2. Mūlamadhyamakakārikā -->
+          <div class="book-card">
+            <div class="book-cover-frame">
+              <img src="https://covers.openlibrary.org/b/isbn/9780195093360-M.jpg" class="book-cover-img" alt="Mūlamadhyamakakārikā">
+            </div>
+            <div style="font-size: 11px; color: #666;">FHR-02 &bull; NEDENSELLİK & MANTIK</div>
+            <h3 style="margin: 3px 0 6px 0; color: #8b1e1e;">Mūlamadhyamakakārikā — Nāgārjuna</h3>
+            <div style="font-size: 12.5px; line-height: 1.55; color: #222;">
+              Nāgārjuna mistik süsleri ve soyut dogmaları bir kenara bırakarak doğrudan dilin ve mantığın sınırlarını zorlar. Temel tez son derece nettir: Hiçbir nesnenin, hiçbir olgunun kendi başına bağımsız bir tözü (özü) yoktur; her şey karşılıklı bir neden-sonuç zinciri (pratītyasamutpāda) içinde varlık kazanır. Bir malzemenin sertliği bile ancak ona uygulanan kuvvet karşısında anlam bulur. Bağımsız bir "ben" vehmini yıkan, varoluşu mutlak bir ilişki ağı olarak ortaya koyan en sarsılmaz felsefi çözümlemedir.
+            </div>
+            <div style="clear: both;"></div>
+          </div>
+
+          <!-- 3. The Darker Nations -->
+          <div class="book-card">
+            <div class="book-cover-frame">
+              <img src="https://covers.openlibrary.org/b/isbn/9781595583420-M.jpg" class="book-cover-img" alt="The Darker Nations">
+            </div>
+            <div style="font-size: 11px; color: #666;">FHR-03 &bull; ÜÇÜNCÜ DÜNYA & TARİH</div>
+            <h3 style="margin: 3px 0 6px 0; color: #8b1e1e;">The Darker Nations — Vijay Prashad</h3>
+            <div style="font-size: 12.5px; line-height: 1.55; color: #222;">
+              "Üçüncü Dünya" bugün zihinlerde yoksulluğun coğrafi adı gibi kodlanıyor; oysa Prashad bunun bir yer değil, tarihsel bir irade olduğunu hatırlatır. 1955 Bandung Konferansı’nda Nehru, Sukarno, Çu En-lay ve Nasır’ın temsil ettiği şey; dünyanın iki kutuplu nükleer tahakküme teslim olmasına karşı bağımsız bir kalkınma hattı kurma kararlılığıydı. Kendi kaynaklarına güvenen bir ağır sanayi, kamucu bir planlama ve emperyal sömürüye karşı ortak bir cephe... Kitap, bu iradenin hangi borç tuzaklarıyla ve darbelerle tasfiye edildiğini soğukkanlılıkla belgeler.
+            </div>
+            <div style="clear: both;"></div>
+          </div>
+
+          <!-- 4. İnsanlığın Bu Dünyası -->
+          <div class="book-card">
+            <div class="book-cover-frame">
+              <img src="https://covers.openlibrary.org/b/isbn/9780140256352-M.jpg" class="book-cover-img" alt="This Earth of Mankind">
+            </div>
+            <div style="font-size: 11px; color: #666;">FHR-04 &bull; ASYA EDEBİYATI & DİRENİŞ</div>
+            <h3 style="margin: 3px 0 6px 0; color: #8b1e1e;">İnsanlığın Bu Dünyası — Pramoedya Ananta Toer</h3>
+            <div style="font-size: 12.5px; line-height: 1.55; color: #222;">
+              Pramoedya bu başyapıtı Suharto rejiminin Buru Adası tecrit kampında, kağıt ve kalemin yasak olduğu koşullarda koğuş arkadaşlarına gece fısıldayarak ezberletti. 19. yüzyıl sonu Cava’sında Hollanda sömürge hukuku ile yerli feodalizmin kurduğu çifte mengeneyi anlatır. Başkarakter Minke Batı’nın "hukuk ve medeniyet" masallarına inanmış bir soyludur; ta ki sömürge mahkemesinin yerliyi insan bile saymayan çarkıyla ezilene kadar. Asya halklarının uyanışını ve insanın onurunu ancak kendi toprağıyla savunabileceğini gösteren sarsıcı bir direniş belgesidir.
+            </div>
+            <div style="clear: both;"></div>
+          </div>
+
+          <!-- 5. Büyük Dönüşüm -->
+          <div class="book-card">
+            <div class="book-cover-frame">
+              <img src="https://covers.openlibrary.org/b/isbn/9780807056431-M.jpg" class="book-cover-img" alt="The Great Transformation">
+            </div>
+            <div style="font-size: 11px; color: #666;">FHR-05 &bull; İKTİSAT & KAMU DÜZENİ</div>
+            <h3 style="margin: 3px 0 6px 0; color: #8b1e1e;">Büyük Dönüşüm (The Great Transformation) — Karl Polanyi</h3>
+            <div style="font-size: 12.5px; line-height: 1.55; color: #222;">
+              Kendi kendini düzenleyen piyasa fikri bir doğa kanunu değil, toplumu parçalayan ütopik ve yıkıcı bir kurgudur. Polanyi; emeğin, toprağın ve paranın metalaştırılmasının insan tabiatına aykırı olduğunu tarihsel delillerle gösterir. Piyasayı dizginsiz bıraktığınızda toplum kendini korumak için kaçınılmaz refleksler üretir. İktisadın toplumun ve kamunun denetiminde olması gerektiğini, aksi halde üretim ilişkilerinin barbarlığa dönüşeceğini anlatan en temel kamucu analizdir.
+            </div>
+            <div style="clear: both;"></div>
+          </div>
+
+          <!-- 6. İnce Memed -->
+          <div class="book-card">
+            <div class="book-cover-frame">
+              <img src="https://covers.openlibrary.org/b/isbn/9789750807145-M.jpg" class="book-cover-img" alt="İnce Memed">
+            </div>
+            <div style="font-size: 11px; color: #666;">FHR-06 &bull; TOPRAK, MÜLKİYET & ANADOLU</div>
+            <h3 style="margin: 3px 0 6px 0; color: #8b1e1e;">İnce Memed — Yaşar Kemal</h3>
+            <div style="font-size: 12.5px; line-height: 1.55; color: #222;">
+              Çukurova’nın sıcağı, pamuk tarlaları ve Toroslar’ın sarp kayalıkları sadece bir arka plan değil; doğrudan karakterlerin öfkesini ve kemik yapısını belirleyen fiziki unsurlardır. İnce Memed bireysel bir intikam hikayesi değildir; topraksız bırakılan, hasadına el konan köylünün adaletsiz mülkiyet düzenine karşı geliştirdiği biyolojik bir reflekstir. Bir ağa gider yerine başkası gelir; çünkü asıl mesele şahıslar değil, toprağın üstündeki zulüm mekanizmasıdır. Dili Toros kayaları kadar sert ve topraktan beslenen bir halk destanıdır.
+            </div>
+            <div style="clear: both;"></div>
+          </div>
+
+        </div>
+
+        <!-- ================= 7. HAKKIMDA ================= -->
+        <div id="page-hakkimda" class="page-section">
+          <div class="breadcrumb">Gezinti: <a onclick="navigateTo('home')">Ana Sayfa</a> &gt; Hakkımda</div>
+          <span class="section-badge">HAKKIMDA</span>
+
+          <div class="paper-box">
+            <p style="margin-top: 0;">
+              Maddenin yapısı, sebep-sonuç ilişkileri ve gündelik hayatın mekaniği üzerine tutulmuş notlar. Biçimin işleve hizmet ettiği asgari bir yaşam disiplini ve Ankara merkezli gözlemler.
+            </p>
+            <hr style="border: 0; border-top: 1px dotted #999; margin: 12px 0;">
+            <div style="font-size: 12px; color: #333;">
+              <strong>Konum:</strong> Ankara<br>
+              <strong>Alan:</strong> Kayıt & Gözlem<br>
+              <strong>Alan Adı:</strong> calik.in
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= 8. İRTİBAT ================= -->
+        <div id="page-irtibat" class="page-section">
+          <div class="breadcrumb">Gezinti: <a onclick="navigateTo('home')">Ana Sayfa</a> &gt; İrtibat</div>
+          <span class="section-badge">İRTİBAT</span>
+
+          <div class="paper-box">
+            <p>Doğrudan iletişim ve yazışmalar için:</p>
+            <p>
+              &bull; <strong>E-Posta:</strong> <a href="mailto:kerem@calik.in">kerem@calik.in</a><br>
+              &bull; <strong>Instagram:</strong> <a href="https://instagram.com/kullaniciadin" target="_blank">@kullaniciadin</a>
+            </p>
+          </div>
+        </div>
+
+        <!-- ================= YAZI OKUMA PANELİ ================= -->
+        <div id="page-post" class="page-section">
+          <div class="breadcrumb">
+            Gezinti: <a onclick="navigateTo('home')">Ana Sayfa</a> &gt; <span id="postBreadcrumbCategory">Bölüm</span> &gt; <span id="postBreadcrumbTitle">Başlık</span>
+          </div>
+          
+          <h2 id="postTitle" style="font-size: 16px; margin: 10px 0 4px 0; color: #8b1e1e;"></h2>
+          <div id="postMeta" style="font-size: 11px; color: #666; margin-bottom: 12px;"></div>
+          
+          <hr class="bevel">
+
+          <div id="postBody" class="paper-box" style="line-height: 1.7; font-size: 13.5px;"></div>
+
+          <div style="margin-top: 14px;">
+            <button onclick="goBackFromPost()" style="cursor: pointer; padding: 4px 10px; font-family: monospace;">&larr; Geri Dön</button>
+          </div>
+        </div>
+
+        <hr class="bevel">
+        <div class="footer">
+          © 2026 Kerem Çalık &bull; calik.in &bull; Bağımsız metin arşivi.
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    // Defterdeki el yazısı notlarından süzülen 5 kapsamlı makale (400-500 kelime)
+    const posts = {
+      'kaya-ve-nehir': {
+        category: 'Gözlemler',
+        catKey: 'gozlemler',
+        title: 'Kaya ve Nehir: Sertliğin Kırılganlığı, Suyun İradesi',
+        date: 'Kayıt: GZL-01 &bull; Ankara',
+        content: `
+          <p>Hayatın içinde akış mı hakikattir, yoksa akışın içindeki hayat mı? İnsan hayatında gördüğümüz o "oluş", bir girdaptan ya da teslimiyetten ziyade bir nehrin akışına benzer[cite: 10]. Su akmaktadır ama önüne bir engel çıkıp çıkmayacağı belirsizdir[cite: 10]. Gün gelir önüne devasa bir kaya çıkar; nehrin yatağını zorlar, akışı kesmeye çalışır[cite: 10]. Bu noktada bizim hayatımızda olan oluş farklı mıdır? Karşımıza çıkan engelleri değiştirememize rağmen ona bakışımızı, o engelle olan temasımızı nasıl kuruyoruz?[cite: 10]</p>
+          <p>Bir nehrin önüne dev bir kaya düştüğünde, su o kayaya öfkeyle çarpıp kendisini yok etmez[cite: 10, 11]. Nehir onu aşındırıp geçebilir; ama kaya devasa bir setse su geri çekilip birikmez, köşelerinden sızar, etrafından dolanır ve yoluna devam eder[cite: 10, 11]. Nehir kayaya fevri davranmaz[cite: 11]. Kayanın kibri, sertliğinde ve kütlesindedir[cite: 11]. Ancak uzun süre suyun akışına maruz kalan o sert kaya, eninde sonunda unufak olur[cite: 11]. Çünkü sertlik dayanıksızdır; esneklik ve yumuşaklık ise kalıcıdır[cite: 11]. İki tarafın mücadelesi gibi görünen bu durum aslında iki zıtlıktan ziyade akışın hizmetinde olan iki haldir[cite: 13].</p>
+          <p>Malzeme dünyasında da böyledir: Tav çubukları katı ve serttir[cite: 13]. Onu sert ateşle karşılaştırırsınız, akkor hale gelir; ama nihayetinde yumuşar, buhar olur veya suyla karşılaştığında iç gerilimini bırakır[cite: 13]. İnsanın önündeki en büyük engel de dışarıdaki nesneler değil, kendi kibir motorudur[cite: 11]. Engeli bir düşman gibi görüp ona toslamak yerine; su gibi yumuşak, sabırlı ve akışkan kalabilmek insanın en büyük mukavemetidir[cite: 11]. İnsan ve canlıların çıkmazı da burada başlar: Hem materyal olan dünyada hem de kozmolojik bir hakikat olan dünyada sürekli akışın yönünü değiştirmeye çalışırız[cite: 13]. Oysa engelleri düşman olarak görmektense onun mahiyetini gözlemlemek, bu dünyanın kibrinden ve yorgunluğundan arınmanın tek yoludur[cite: 13].</p>
+        `
+      },
+      'bataklik-ve-lotus': {
+        category: 'Varlık & Neden',
+        catKey: 'varlik-neden',
+        title: 'Bataklık ve Lotus: Çamurun Ortasında Özü Korumak',
+        date: 'Kayıt: VRN-01 &bull; Ankara',
+        content: `
+          <p>Bataklıkta açan bir lotus, suyunu ve besinini çamurdan alır ama yapraklarına tek bir damla çamur yapışmaz. İnsanın bu devirde özünü ve merhametini koruması da böyledir: Dünyadan kaçarak değil, o çürümenin tam ortasında durup onun zehrini kendi içine almayı reddederek var olmak[cite: 9].</p>
+          <p>Lotus, kök saldığı çamurdan nefret etmez[cite: 9]. Bilir ki kökünü o çamurun dibine salmazsa, güneşe uzanacak gövdeyi bulamaz[cite: 9]. İnsanın kötülükten ve cehaletten arınması; steril, dünyadan koparılmış bir fanusta oturarak gerçekleşmez[cite: 9]. Çamur zaten oradadır; mesele, onu besin olarak kullanıp onun rengine boyanmamaktır[cite: 9]. Çamur bir zemin, bir koşuldur; insanın görevi o zeminle savaşmak değil, o zeminin üzerinde kendi formunu korumaktır[cite: 9].</p>
+          <p>İnsanların en büyük kurnazlığı ise şudur: <em>"Dünya zaten kirli, herkes menfaat peşinde, ben neden dürüst kalayım?"</em> diyerek kendi merhametsizliğine kılıf uydururlar[cite: 9]. Bu, lotusun çamura teslimiyetinden başka bir şey değildir[cite: 9]. Oysa öz; dışarının pisliğiyle kirlenecek kadar zayıf değildir[cite: 9]. Dışarının pisliğiyle kirlenecek kadar zayıf olan şey ancak tohumu çürümüş bir iradedir; insan ancak kendi isteğiyle o zehri tohumuna taşırsa çürür[cite: 9].</p>
+          <p>Yaprağın çamuru tutmaması bir tesadüf değildir; yüzeyindeki mikroskobik dokunun, yani merhamete duyulan öz-disiplinin sonucudur[cite: 9]. Dışarıdan gelen her öfke, lotusun yaprağına çarpan çamurlu su damlası gibidir: Gelir, çarpar ve tutunamadan aşağı kayar[cite: 9]. İntikam peşinde koşulmaz, öfkeye öfkeyle karşılık verilmez; sadece içe işlemesine izin verilmez[cite: 9]. Merhamet bir zaaf değil, tam aksine çamurun içinde açabilen yaprağın yüzey gerilimidir[cite: 9].</p>
+        `
+      },
+      'kibir-motoru': {
+        category: 'Kamusal Meseleler',
+        catKey: 'kamusal-meseleler',
+        title: 'Kibir Motoru ve Kitlelerin Merhametsizleşmesi',
+        date: 'Kayıt: KMS-01 &bull; Ankara',
+        content: `
+          <p>Kitleleri güden ideolojiler ya da dogmatik yapılar, neden her şeyden önce bireysel merhameti yok eder?[cite: 7] Koruma, aidiyet ve güvende hissetme refleksiyle yola çıkan insan; nasıl olur da en temel erdemini unutup, mensubu olduğu grubun kibriyle hareket eden bir saldırgana dönüşür?[cite: 7] İnsani erdemler krizdeyken bu devirde bir üstünlük yarışı gözlemek kaçınılmazdır; çünkü kibir bu devrin erdeminin ana motoru olmuştur[cite: 8].</p>
+          <p>Kitleleri merhametten ayırmak sürdürülebilir bir güç mekanizması yaratır[cite: 7]. Bir araya gelen topluluk, kendi varlığını meşrulaştırmak için sürekli "öteki" üretmek zorundadır[cite: 7]. Zihin bu döngüye girdiğinde her hareketi haklı, her kibri meşru görmeye başlar[cite: 7]. Adalet ve erdem iddiasıyla yola çıkan yapılar; günün sonunda sadece kendi varlığını sürdürmeyi amaçlayan birer kibir motoruna dönüşür. Savaşmaktaki kibir motorunda bulunmaktayız; insan dahi sormadan edemiyor, neden?[cite: 8]</p>
+          <p>Bana göre bu sorunun cevabı açıktır: İnsan ne bir kontrol altında tutulması gereken vahşi bir hayvandır ne de dünyada mutlak hükümranlık için yaratılmış bir varlıktır[cite: 8]. Tarih boyunca insanın en büyük zaafı, bu iki inanç oldu[cite: 8]. Biri, kendini diğer canlılardan ve insanlardan üstün görüp kast sistemleri kurmak; diğeri ise insanı sadece katı normlarla terbiye edilmesi gereken tehlikeli bir varlık saymak[cite: 8]. İki anlayışta da ortak olan şey şudur: İnsanı kontrol altında tutulması gereken mekanik bir nesneye indirgerler[cite: 8].</p>
+          <p>Oysa kibir motorunu durdurmadıkça, biriktirilen unvanların ve kurulan tahakkümün insana getireceği tek şey daha derin bir çürümedir[cite: 7, 8]. Eğer bir fikir bir insanı başka bir canlıya zarar vermeye öğütlüyorsa, bu en başta kendi özüne yöneltilmiş bir tehdittir[cite: 7]. Gerçek barış dünyayı dönüştürmek değil; birbirimizi anlamaktan en azından anlamaya çalışmaktan geçer ki erdemli bir toplum kurulabilsin[cite: 7].</p>
+        `
+      },
+      'dunyanin-sefasi': {
+        category: 'Varlık & Neden',
+        catKey: 'varlik-neden',
+        title: 'Dünyanın Cefası ve Kaçış Yanılgısı',
+        date: 'Kayıt: VRN-02 &bull; Ankara',
+        content: `
+          <p>Dünyanın cefası gerçeği, inkâr edilemez bir hakikattir. Ancak bu acı gerçeği romantize edilmiş bir manifesto gibi okumak insanı çözüme götürmez[cite: 12]. Gerçek kurtuluş; hiçbir zaman sadece tapınaktaki bir keşişe, dağ başındaki münzeviye veya gündelik hayattan soyutlanmış steril köşelere hediye edilmez[cite: 12].</p>
+          <p>Zihnimiz, kurtuluşu öyle bir odaya hapsetti ki bu dünyada anlam ifade etmeyen soyut bir metafiziğe indirgedi[cite: 12]. Bizi ve dünyayı boğan en tehlikeli tuzak da budur zaten[cite: 12]. Zihindeki kurtuluş masallarına sığınarak hayatı bir kalıba sokamazsınız[cite: 12]. Dünyayı merhametle dönüştürmek zorundayız; çünkü çoğumuzun zihninde dünya sadece bir acı diyarı iken, merhamet ise bunun sadece tesellisi veya öteki taraf için kabulleniş aracı olarak görülüyor[cite: 12].</p>
+          <p>Oysa işin büyüklüğü burada başlıyor: Merhameti delillerden çıkardığınız zaman geriye saf acı kalır ve bu doğru bir gözlem ama acıyı acı ile çözmeye çalıştığınız için o acının en büyük kölesi ve yapıcısı olursunuz[cite: 12]. Acıdan kaçarak değil, acının doğasını anlayarak yaşamak gerekir[cite: 12].</p>
+          <p>Merhamet denilen şey soyut bir duygu gösterisi değildir[cite: 12]. Acıyı acıyla çözmeye çalışmak yerine; onu soğukkanlılıkla gözlemlemek, nedenlerini kavramak ve hayatın olağan döngüsü içinde karşılamak gerekir[cite: 12]. Kaçış bir arınma sağlamaz; zihni sadece yeni yanılsamaların kucağına iter[cite: 12].</p>
+        `
+      },
+      'tarihsel-zafiyet': {
+        category: 'Kamusal Meseleler',
+        catKey: 'kamusal-meseleler',
+        title: 'Tarihsel Zafiyet: Kast, Tahakküm ve İnsanın Sınırları',
+        date: 'Kayıt: KMS-02 &bull; Ankara',
+        content: `
+          <p>Tarih boyunca insan ırkının en büyük zaafı, kendini diğer varlıkların ve hemcinslerinin üstünde konumlandırma arzusudur[cite: 8]. Maalesef bu üstünlükçü bakış açısı öyle seviyelere taşınmıştır ki kendi içinde kast sistemleri, ırki ayrımlar yapmaya kalkışılmıştır[cite: 8]. Bunlar bize verilen öze edilen hakaretin bir yüzüdür[cite: 8]. Diğer tarafa baktığımızda ise insanı ilkel normlarla yorumlayan bir sığlık görürüz ve bu anlayışlar zıt görünse dahi aynı şeyi yaparlar: Merhamet ve temel insani duyguları engeller altına alırlar[cite: 8].</p>
+          <p>İnsanın, dünyanın ve evrenin başlangıcı büyük bir sırdı; İbrahimi inançta Tanrı, Darwinist teoride evrim ve daha niceleri...[cite: 16] Ama en temel fikre geri indiğimizde görürüz ki insanlık hep sabit ve peşin inançlarla geri adımlarla kendi sonunu hazırladı[cite: 16]. Tarih bize öze ters düştüğümüz anda yaşadığımız felaketlerin boyunu göstermesine rağmen hiçbir çağda bu kadar ileri gidememiştik[cite: 16]. Üstümüzde bulut olan bir suya toz attığımızda ne olur? Su bulanır[cite: 16]. Öze korumak için suyun en temel niteliğini unutmamak gerekir[cite: 16].</p>
+          <p>Toplumsal değerleri savunmak adına yapılan eylemler eğer kurtarıcılık adı altında bir sömürgeye dönüşüyorsa, orada özü korumaktan ziyade kurumsal bir tahakküm üretilir[cite: 16]. Konfüçyüs'ün de, Buda'nın da, kadim bilgelerin de insanlığa hatırlattığı şey buydu; fakat kitleler o öğretileri birer iktidar basamağına dönüştürdü[cite: 16]. İnsan ne yeryüzünün mutlak efendisidir ne de yalnızca itaat etmesi gereken bir tebaadır[cite: 8].</p>
+          <p>Gerçek kamusal bilinç, insanın kendi sınırlarını bilmesiyle başlar. Biriktirilen gücün ve hiyerarşilerin kibrinden arınmadıkça, toplumların varacağı yer adaletin değil, sadece daha organize bir sömürünün egemenliğidir[cite: 7, 8, 16].</p>
+        `
+      }
+    };
+
+    let previousPage = 'home';
+
+    function navigateTo(pageId) {
+      document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
+      const target = document.getElementById('page-' + pageId);
+      if (target) {
+        target.classList.add('active');
+        previousPage = pageId;
+        window.scrollTo(0, 0);
+      }
+    }
+
+    function openPost(postId) {
+      const post = posts[postId];
+      if (!post) return;
+
+      document.getElementById('postBreadcrumbCategory').innerHTML = `<a onclick="navigateTo('${post.catKey}')">${post.category}</a>`;
+      document.getElementById('postBreadcrumbTitle').innerText = post.title;
+      document.getElementById('postTitle').innerText = post.title;
+      document.getElementById('postMeta').innerHTML = post.date;
+      document.getElementById('postBody').innerHTML = post.content;
+
+      document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById('page-post').classList.add('active');
+      window.scrollTo(0, 0);
+    }
+
+    function goBackFromPost() {
+      navigateTo(previousPage || 'home');
+    }
+  </script>
+
+</body>
+</html>
